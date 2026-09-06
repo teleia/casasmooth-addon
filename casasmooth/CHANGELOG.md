@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.0.113 - 2026-09-06
+
+- **Page d'aide et catalogue des fonctionnalités** : ils n'existaient sur aucune
+  box installée depuis l'image, le bouton « ? » des tableaux de bord menait à
+  une page introuvable. Le catalogue dont ils sont générés n'était pas embarqué
+  dans l'image ; il l'est désormais, et la page d'aide apparaît à la prochaine
+  mise à jour de la configuration.
+
+- **Thèmes** : trois textes de l'app, le chevron du lien vers le tutoriel dans
+  les Réglages, le message d'attente du plan 3D et les libellés du graphe
+  d'énergie, appelaient un jeton de couleur qui n'existe dans aucun thème.
+
+- **Sous le capot** : une release ne se coupe plus qu'avec l'outil dédié, qui
+  refuse de partir tant qu'un test est rouge ; la chaîne d'intégration rejoue
+  aussi les tests de l'app mobile avant de construire l'image.
+
 ## 2.0.112 - 2026-09-06
 
 - **Découvrir votre casasmooth** : une page de tutoriel, construite à partir de
