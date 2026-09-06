@@ -1,5 +1,50 @@
 # Changelog
 
+## 2.0.112 - 2026-09-06
+
+- **Découvrir votre casasmooth** : une page de tutoriel, construite à partir de
+  votre installation, s'ouvre depuis les Réglages de l'app (« Découvrir votre
+  casasmooth ») et depuis la page d'aide des tableaux de bord. Elle présente la
+  box, ses deux interfaces, les trois notions à connaître (zone, appareil,
+  service), les services actifs de votre box avec leur description, vos zones et
+  leurs appareils, et montre l'app et la maison en 3D côte à côte : une lumière
+  allumée dans l'app s'allume dans la maison. Un glossaire explique les icônes
+  de l'écran affiché, celles de l'app comme celles des tableaux de bord, en ne
+  retenant que ce que votre box montre vraiment. En quatre langues.
+
+- **Plan 3D sans modèle** : quand aucun modèle 3D n'a été téléversé, la vue
+  Plan 3D dessine désormais votre maison à partir de votre configuration — un
+  niveau par étage, les zones visibles dans l'accueil, chaque zone
+  proportionnée à son nombre de lampes, les lampes posées dans leur zone, le
+  nom de chaque zone au-dessus d'elle. Le plan de démonstration fixe disparaît.
+  Le nom des zones s'affiche aussi sur les niveaux qui ont un modèle.
+
+- **Plan 3D, position des lampes** : la position d'une lampe appartient
+  désormais à la vue qui la montre. Deux vues du même étage, un modèle et un
+  plan généré par exemple, ont chacune leurs positions ; une lampe déplacée à
+  la main sur l'une ne bouge pas sur l'autre. Les positions existantes sont
+  reprises telles quelles. La vue rouvre le dernier étage regardé, et pose ses
+  lampes même quand elle démarre avant le chargement des zones.
+
+- **Page d'aide des tableaux de bord** (bouton « ? ») : elle décrit maintenant
+  ce que la box a réellement — pour chaque zone visible dans l'accueil,
+  l'inventaire de ses appareils avec leurs noms et ses automatismes actifs, et
+  pour chaque tableau de bord ses services actifs et leurs fonctions. Les
+  textes rédigés automatiquement, qui inventaient parfois un thermostat ou une
+  commande vocale absents, sont retirés. La page et le catalogue des
+  fonctionnalités suivent votre thème Lovelace, et leur mise à jour n'attend
+  plus l'expiration du cache du navigateur.
+
+- **Traductions** : la vue Plan 3D et le gestionnaire d'étages parlent les
+  quatre langues ; les quarante-trois services de la box ont une description
+  traduite.
+
+- **Sous le capot** : l'API de la box expose le catalogue des services traduit,
+  les onglets réellement générés du tableau de bord d'accueil, le thème par
+  défaut, et la visibilité de chaque zone dans l'accueil ; les étages Home
+  Assistant portent leur niveau. Une régression de démarrage de l'app, une
+  page noire quand un thème était demandé, est corrigée.
+
 ## 2.0.111 - 2026-09-04
 
 - **Enregistrement des ambiances lumineuses** : l'automatisme qui photographie
