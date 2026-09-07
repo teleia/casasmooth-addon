@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.119 - 2026-09-07
+
+- **Correctif Schneider PowerTag.** La 2.0.118 lisait le bloc d'identification
+  des capteurs un registre trop tôt et ne reconnaissait aucun PowerTag sur une
+  vraie passerelle. Vérifié en direct sur le Panel Server du showroom Homatic.
+
 ## 2.0.118 - 2026-09-07
 
 - **Capteurs d'énergie Schneider PowerTag reconnus.** La découverte Modbus
