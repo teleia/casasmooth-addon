@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.0.117 - 2026-09-07
+
+- **Page d'aide et catalogue présents dès le premier démarrage.** La page
+  d'aide (badge « ? », carte du tutoriel) n'était pas produite par la mise à
+  jour lancée au démarrage de l'add-on ni à une montée de version : une box
+  neuve ou fraîchement mise à jour répondait 404 jusqu'à la mise à jour
+  nocturne. Elle est maintenant écrite à chaque passage ; seule la traduction
+  du catalogue attend un passage avec le modèle.
+
+- **Catalogue des fonctionnalités de retour.** `/local/cs_catalog.html`,
+  lié depuis la page d'aide et l'accueil, n'était plus généré depuis mars.
+  Il l'est à nouveau, et sa traduction est mise en cache : plus d'appel au
+  modèle à chaque mise à jour sur une box non francophone.
+
+- **Page d'aide à jour du passage courant.** Elle lisait l'inventaire des
+  zones avant qu'il soit sauvé (toujours le passage précédent, rien au
+  premier). Sur une box neuve, l'absence des interrupteurs de visibilité ne
+  donne plus une page sans aucune zone.
+
 ## 2.0.116 - 2026-09-07
 
 - **Connexion invité par lien, suite** : après le rechargement qui applique
