@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.115 - 2026-09-07
+
+- **Connexion invité par lien** : l'app pouvait se recharger sans fin sur
+  « Chargement de votre maison… » quand le compte invité avait déjà des
+  réglages sur la box. Le lien d'invitation quitte l'adresse avant la
+  connexion, le rechargement qui applique les réglages ne se reconnecte plus.
+
 ## 2.0.114 - 2026-09-07
 
 - **Tutoriel sur petit écran** : la section « Voir l'effet en direct » montre
