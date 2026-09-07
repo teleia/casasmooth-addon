@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.0.118 - 2026-09-07
+
+- **Capteurs d'énergie Schneider PowerTag reconnus.** La découverte Modbus
+  identifie désormais une passerelle EcoStruxure Panel Server (PAS400, PAS600,
+  PAS800) ou PowerTag Link, et énumère chaque capteur PowerTag clipsé sur un
+  disjoncteur : un circuit par unité, avec son nom d'actif, sa phase et son
+  identifiant. L'adoption depuis la page Découverte crée pour chaque circuit
+  un sous-compteur qui publie sa puissance en watts et son énergie en kWh,
+  classés dans la consommation et le sous-comptage. Vérifié sur le showroom
+  Homatic : neuf circuits, dont l'arrivée générale.
+
+- **Import KNX : capteurs d'air et projets ETS imparfaits.** Les capteurs de
+  CO2 (DPT 9.008) et de pression (9.006) reçoivent leur classe ; une humidité
+  en pourcentage (5.001) est un capteur, plus un variateur ; une adresse dont
+  le nom dit une grandeur et le type une autre part en revue au lieu d'être
+  créée fausse. Le type manquant d'une adresse s'hérite de l'objet de
+  communication qui la porte, les adresses que le projet ne relie à rien sont
+  dé-cochées d'office, les commandes centrales (« général », « all ») partent
+  en revue, et les capteurs reçoivent un nom lisible à la place du nom ETS
+  brut. Sur le projet du showroom Homatic : 84 lignes à réviser au lieu de 231.
+
+- **Tableaux de bord** : le curseur de luminosité d'une pièce se masque quand
+  une scène est active.
+
 ## 2.0.117 - 2026-09-07
 
 - **Page d'aide et catalogue présents dès le premier démarrage.** La page
