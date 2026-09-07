@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.114 - 2026-09-07
+
+- **Tutoriel sur petit écran** : la section « Voir l'effet en direct » montre
+  l'app et la maison en 3D côte à côte, ce qui demande un écran large. Sur un
+  téléphone ou dans une fenêtre réduite, elle ne s'affiche plus à moitié : un
+  message poli explique pourquoi et invite à ouvrir la page depuis un
+  ordinateur ou une tablette en mode paysage. En quatre langues.
+
 ## 2.0.113 - 2026-09-06
 
 - **Page d'aide et catalogue des fonctionnalités** : ils n'existaient sur aucune
