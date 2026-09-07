@@ -1,11 +1,25 @@
 # Changelog
 
+## 2.0.116 - 2026-09-07
+
+- **Connexion invité par lien, suite** : après le rechargement qui applique
+  les réglages du compte, l'app repartait vers l'écran de connexion Home
+  Assistant au lieu de reprendre la session invitée déjà ouverte. Elle la
+  reprend.
+
 ## 2.0.115 - 2026-09-07
 
 - **Connexion invité par lien** : l'app pouvait se recharger sans fin sur
   « Chargement de votre maison… » quand le compte invité avait déjà des
   réglages sur la box. Le lien d'invitation quitte l'adresse avant la
   connexion, le rechargement qui applique les réglages ne se reconnecte plus.
+
+- **Logo partenaire : la mise à jour nocturne ne meurt plus dessus.** Le logo
+  Homatic (26827×5591 px) décodé dans l'add-on faisait abattre celui-ci par le
+  système (mémoire) au milieu de la mise à jour, chaque nuit, sans une ligne de
+  log — et la copie servie restait démesurée, donc invisible. Le décodage se
+  fait dans un processus séparé, borné en mémoire : s'il échoue, la mise à
+  jour continue et le dit.
 
 ## 2.0.114 - 2026-09-07
 
