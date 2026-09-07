@@ -1,5 +1,52 @@
 # Changelog
 
+## 2.0.120 - 2026-09-07
+
+- **Sécurité : un invité ne voit plus la facture de son hôte et ne peut plus
+  désarmer la maison.** Le rôle temporaire donnait accès à la vue Énergie du
+  logement et aux commandes de sécurité. Les deux surfaces lui sont désormais
+  fermées, et la garde suit ce que la requête vise, pas l'adresse d'où elle vient.
+
+- **Profil verrouillé.** L'habitant peut figer la configuration de son
+  application et l'imposer aux invités ainsi qu'aux comptes qu'il désigne.
+  L'écran de réglages se tait quand c'est lui qui est figé.
+
+- **Un compteur n'est plus présenté comme un appareil pilotable.** Un capteur qui
+  mesure un départ de tableau sans pouvoir le commander — un PowerTag, un
+  sous-compteur — recevait dans la vue Énergie la ligne complète d'un appareil
+  pilotable : marche/arrêt, « Auto », panneaux de règles activer et désactiver.
+  Aucun de ces boutons n'avait de cible, et rien ne le disait. Il garde ce qui a
+  un sens pour un compteur : la mesure, la courbe, la catégorie d'énergie et les
+  seuils d'alerte, qui notifient sans rien commander.
+
+- **Panneau Énergie de l'accueil.** Il ne promet plus une production solaire que
+  la box n'a pas : sur une installation sans photovoltaïque, il affichait
+  « Entity not found » et un conseil resté sans réponse.
+
+- **Noms d'appareils dans l'écran EMS.** Ils passent à la ligne. Cinq colonnes
+  fixes débordaient dès qu'un nom portait son adresse IP et son unité Modbus.
+
+- **Découverte Modbus : reconnaître un appareil qui refuse de se nommer.**
+  Certains compteurs n'implémentent ni l'identification standard ni SunSpec, mais
+  publient un registre à valeur constante ou un modèle en clair. La découverte lit
+  ces empreintes et nomme l'appareil : EMU Professional II, onduleurs Huawei
+  SUN2000, compteurs MID Schneider iEM3000, bornes de recharge Alfen. La
+  passerelle EcoStruxure Panel Server et ses capteurs PowerTag entrent au registre
+  des protocoles éprouvés, avec un simulateur de banc qui rejoue le matériel tel
+  qu'il a été mesuré sur le showroom Homatic.
+
+- **Profils de registres préparés sur documentation constructeur** pour l'EMU
+  Professional II, le Huawei SUN2000, le Schneider iEM3000 et l'Alfen Eve. Ils
+  sont marqués non vérifiés et ne s'activent chez personne avant une demi-journée
+  de banc contre un appareil réel : une valeur fausse entre dans des bilans, ce
+  qui est pire qu'une absence.
+
+- **Pistes d'intégration élargies au marché suisse.** Le relevé de site propose
+  un chemin pour trente-huit marques — pompes à chaleur, bornes de recharge,
+  onduleurs, compteurs, ventilation — avec leurs prérequis et leurs pièges connus.
+  Quand la bibliothèque SmartGridReady publie déjà un profil, c'est lui qui est
+  proposé plutôt qu'un profil maison.
+
 ## 2.0.119 - 2026-09-07
 
 - **Correctif Schneider PowerTag.** La 2.0.118 lisait le bloc d'identification
