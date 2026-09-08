@@ -1,5 +1,67 @@
 # Changelog
 
+## 2.0.121 - 2026-09-08
+
+- **Sécurité : un visiteur anonyme du réseau local avait les droits du
+  propriétaire.** La branche qui accueille une requête sans crédence ne nommait
+  aucune des trois populations qu'elle laissait passer. Le socket d'état
+  diffusait par ailleurs la maison à qui s'y connectait : un périmètre de VUE
+  existe désormais, distinct de celui d'action. Sur l'application mobile, les
+  onglets dont les données lui sont refusées ne s'affichent plus, et le rôle
+  voyage jusqu'à l'endpoint qui décide de ce qu'on a le droit de voir — il est
+  public et ne savait pas qui l'appelait.
+
+- **Le chat d'un invité ne touche plus qu'à ce qui est sur son accueil, et jamais
+  à la sécurité.** Un modèle contourne une énumération, pas une classe : le plan
+  des réglages sort du périmètre d'un rôle bridé au lieu de reposer sur la bonne
+  volonté du modèle.
+
+- **La vue Qualité de l'air ne se générait plus du tout.** Une référence oubliée à
+  un capteur de particules en interrompait la génération. Elle agrège désormais
+  tous les capteurs d'une pièce au lieu du premier venu, classe les sondes par le
+  registre plutôt que par leur identifiant — une sonde de composant n'est pas la
+  température de la pièce — et ne se déclare plus parfaite quand un composant
+  manque : le danger s'agrège au maximum, le confort à la moyenne. Un capteur mort
+  n'est plus un composant parfait, et un déploiement qui ampute une vue échoue au
+  lieu de passer en silence.
+
+- **Une mesure illisible ne vaut plus zéro.** Neuf moyennes de capteurs comptaient
+  une valeur non numérique comme un zéro, au numérateur comme au dénominateur :
+  une pièce à 21,5 °C accompagnée d'une sonde muette affichait 10,75 °C.
+
+- **Un capteur devenu aveugle est détecté.** Un détecteur de présence qui répond
+  toujours « off » reste disponible, donc invisible à l'alerte hors-ligne. La
+  comparaison se fait maintenant sur son propre passé.
+
+- **La scène TV retrouve son garde-fou d'ambiance et sa reprise en fin de
+  lecture.** Le garde-fou s'en tient à la luminosité mesurée, la configuration par
+  période disant déjà ce qu'on attend de jour ; la reprise se fonde sur l'état et
+  non plus sur l'identité de ce qui a déclenché.
+
+- **L'assistant lit le passé de la box au lieu de le supposer**, et sait dire si un
+  changement vient d'une main ou d'une automatisation, y compris lorsque personne
+  n'est nommé.
+
+- **Les automatisations qui agissent sont enregistrées, celles qui bavardent ne le
+  sont plus.** À savoir : une exclusion de l'enregistreur tue aussi les
+  statistiques de long terme.
+
+- **La durée d'ouverture d'une vanne est la nôtre**, parce que la vanne en avait
+  déjà une et qu'elle ne la disait pas.
+
+- **La carte de flux du mobile a été retirée.** Importée sans avoir jamais été
+  montée, elle inventait 6,5 kW.
+
+- **Le périmètre de l'assistant vocal tient.** Un identifiant de conversation en
+  forme d'ULID se faisait remplacer par Home Assistant : le périmètre était
+  déclaré, puis jamais retrouvé.
+
+- **Un éclairage extérieur qu'on n'allume pas n'est pas un éclairage**, et les murs
+  se distinguent enfin dans la coque en trois dimensions, grâce à deux matières.
+
+- **La boîte de support sondée est casasmoothsupport@teleia.ch**, toutes les cinq
+  minutes.
+
 ## 2.0.120 - 2026-09-07
 
 - **Sécurité : un invité ne voit plus la facture de son hôte et ne peut plus
