@@ -1,5 +1,53 @@
 # Changelog
 
+## 2.0.122 - 2026-09-08
+
+- **Par l'accès distant, le propriétaire ne voyait plus que l'accueil et les
+  réglages.** L'application affichait tous ses onglets une première fois, puis
+  les retirait au rafraîchissement : la box la disait anonyme alors qu'elle
+  était bel et bien connectée. Deux causes, toutes deux fermées. La box exigeait,
+  en plus d'un jeton valide, un indice de contexte que le tunnel désactive — un
+  appelant qui apportait la preuve se voyait refuser sur l'absence d'un simple
+  indice ; c'est désormais la preuve seule qui décide. Et l'identité d'un
+  visiteur était demandée au Superviseur, canal qui accepte le jeton de la box
+  et refuse celui d'une personne : elle est maintenant demandée à Home Assistant
+  lui-même.
+
+- **Les thèmes de casasmooth n'existaient dans aucun tableau de bord.** Le
+  fichier était bien posé sur chaque box, mais rien ne disait à Home Assistant
+  d'ouvrir le dossier qui le contient : l'écran Thème répondait « Aucun thème
+  disponible ». La déclaration avait été retirée avec une option voisine qui,
+  elle, cassait le démarrage. Les cinq palettes reviennent.
+
+- **Une box de marque reçoit enfin le thème de sa marque sur son tableau de
+  bord.** L'écart se voyait précisément chez celui qui a une marque :
+  application aux couleurs de son partenaire, tableau de bord aux couleurs de
+  casasmooth. Le thème n'est installé que sur la box concernée — et il est
+  retiré quand le partenariat s'arrête.
+
+- **Le bouton « Ouvrir Home Assistant » de fin d'installation ne faisait rien.**
+  Ni page manquante, ni message : rien. L'occupant terminait son installation
+  sur un bouton mort.
+
+- **La vanne d'eau et ses réglages se lisent ensemble.** Le bouton à gauche ;
+  à droite la durée d'ouverture puis, en dessous, les deux notifications sous
+  forme de boutons — leurs libellés se tronquaient faute de place.
+
+- **Une automatisation prend l'icône du robot dans l'application mobile**, comme
+  partout ailleurs, au lieu de celle d'un appareil inconnu.
+
+- **Le poste de l'installateur ne reste plus coupé de son réseau.** Fermer la
+  fenêtre du script de mise en service au lieu de l'arrêter proprement laissait
+  le PC en adresse fixe, avec son partage et sa règle de pare-feu, sans moyen
+  d'en sortir. Il se répare seul au lancement suivant, ou par une option dédiée.
+
+- **Un déploiement qui réussit charge désormais vraiment le code déployé.** La
+  clé qui sert à vérifier la version en place disparaissait en cours de route :
+  le contrôle échouait en silence, et le service continuait de servir le code de
+  son démarrage. Trois mises à jour de suite ont ainsi été livrées sans effet.
+  Au passage, trois échecs jusqu'ici muets — jeton refusé, identité non résolue,
+  contrôle impossible — laissent maintenant une trace exploitable.
+
 ## 2.0.121 - 2026-09-08
 
 - **Sécurité : un visiteur anonyme du réseau local avait les droits du
