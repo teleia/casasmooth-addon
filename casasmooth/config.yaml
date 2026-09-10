@@ -6,7 +6,7 @@
 # restart the addon for an instant reload. See docs/operations/deployment.md.
 
 name: "casasmooth"
-version: "2.0.122"
+version: "2.0.123"
 slug: casasmooth
 description: "casasmooth Smart Home System"
 url: "https://github.com/teleia/casasmooth-addon"

@@ -1,5 +1,53 @@
 # Changelog
 
+## 2.0.123 - 2026-09-10
+
+- **Un visiteur sur votre WiFi ne pilote plus votre maison sans votre accord.**
+  Jusqu'ici, être connecté au réseau suffisait : la box y voyait un appelant de
+  confiance et le laissait allumer, ouvrir, chauffer — et déverrouiller. Cet
+  accès n'avait ni début ni fin, donc rien ne permettait de le retirer, et le
+  WiFi porte jusqu'au jardin. Désormais un visiteur voit l'accueil et **demande**
+  l'accès ; vous l'accordez depuis votre téléphone, pour une durée que vous
+  choisissez (8 heures par défaut), et il s'arrête ensuite tout seul. Réglages →
+  Invités liste les accès en cours et permet de tout retirer d'un geste. Les
+  serrures restent hors de portée de ce type d'accès.
+
+- **La scène TV ne détruit plus l'ambiance de la pièce.** Elle se comportait
+  comme un réglage : allumer la télévision réécrivait la scène du salon, qui ne
+  revenait jamais. C'est maintenant une **couche** — elle s'applique par-dessus,
+  puis se retire en laissant la pièce comme elle était. Et un lecteur mis en
+  pause ne compte plus comme « en usage » : la maison cesse de croire que vous
+  regardez un film parce que vous avez appuyé sur pause il y a deux heures.
+
+- **Une scène rétablit aussi la teinte de vos lumières**, plus seulement leur
+  intensité. Une lampe passée en blanc froid gardait sa teinte au retour de la
+  scène : le niveau était bon, la couleur non.
+
+- **L'onglet Énergie était vide sur le réseau local.** Toutes ses données
+  répondaient « accès refusé » depuis la maison, alors qu'elles s'affichaient à
+  distance. L'écran promettait des courbes qu'il ne pouvait pas aller chercher.
+
+- **Le journal de l'énergie raconte des épisodes au lieu d'égrener des lignes**,
+  et nomme la décision qui a réellement tranché — ce qui a fait démarrer le
+  chauffe-eau, et pourquoi à ce moment-là.
+
+- **Le pilotage thermique s'arrêtait de décider passé midi.** L'optimiseur
+  rejouait une matinée qu'il reconstruisait au lieu de regarder l'après-midi
+  devant lui, et ne trouvait alors plus aucune solution. Les après-midi sont
+  de nouveau pilotées.
+
+- **Un appareil qu'on ne parvenait pas à interroger était déclaré mort.** Le
+  diagnostic confondait « je ne vois pas ce canal » et « ce canal ne répond
+  pas », et signalait des pannes qui n'existaient pas.
+
+- **Décomptes de charges en PDF, Excel et HTML pour les gérances** — synthèse
+  d'abord, détail ensuite, avec un graphique d'évolution mensuelle. Les pannes
+  de compteur y sont **déclarées** plutôt que silencieusement comblées : un
+  relevé manquant se voit, il ne se devine pas.
+
+- **L'assistant peut rédiger une automatisation** depuis le serveur MCP, et la
+  soumettre — sans pouvoir l'installer lui-même.
+
 ## 2.0.122 - 2026-09-08
 
 - **Par l'accès distant, le propriétaire ne voyait plus que l'accueil et les
