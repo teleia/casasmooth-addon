@@ -19,9 +19,10 @@
   pause ne compte plus comme « en usage » : la maison cesse de croire que vous
   regardez un film parce que vous avez appuyé sur pause il y a deux heures.
 
-- **Une scène rétablit aussi la teinte de vos lumières**, plus seulement leur
-  intensité. Une lampe passée en blanc froid gardait sa teinte au retour de la
-  scène : le niveau était bon, la couleur non.
+- **Choisir une scène masque les réglages qu'elle remplace.** Quand vous fixez
+  une scène pour une période, le curseur de luminosité disparaissait déjà,
+  puisque la scène impose la sienne ; la température de couleur, elle, restait
+  affichée alors qu'elle ne commandait plus rien.
 
 - **L'onglet Énergie était vide sur le réseau local.** Toutes ses données
   répondaient « accès refusé » depuis la maison, alors qu'elles s'affichaient à
