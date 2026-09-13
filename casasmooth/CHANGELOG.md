@@ -1,5 +1,45 @@
 # Changelog
 
+## 2.0.124 - 2026-09-13
+
+- **Les lumières sur détecteur s'éteignent à l'heure prévue, même après un
+  redémarrage.** Un redémarrage ou un rechargement de Home Assistant faisait
+  perdre le minuteur d'extinction : la lumière restait allumée jusqu'à la
+  détection suivante, ou jusqu'à vous. Le minuteur reprend maintenant là où il
+  en était, pièce par pièce.
+
+- **Le garde-fou anti-lumière-oubliée ne s'occupe plus que de la pièce
+  concernée.** Il prenait la main sur toute la maison : une scène d'ambiance
+  en cours ailleurs se retrouvait éteinte après quelques dizaines de secondes.
+
+- **L'extinction automatique n'éteint plus une pièce où la télévision est en
+  cours d'usage.**
+
+- **Un calendrier par volet.** Sous « Réglages par volet », chaque volet peut
+  se fermer et se rouvrir à heure fixe, chaque jour, entre deux dates — par
+  exemple pendant les vacances. Le calendrier prime sur la période, la
+  lumière, la température et le maintien nocturne.
+
+- **Les caméras gardent leur configuration.** Les instructions pour l'IA et
+  les quatre capteurs d'une caméra s'effaçaient à chaque redémarrage, et la
+  vue affichait « Entité non trouvée ». Le résultat d'une analyse arrive
+  aussi en quelques secondes au lieu d'attendre le passage suivant, jusqu'à
+  cinq minutes plus tard.
+
+- **Les champs de saisie des thèmes sombres sont lisibles.** Ils s'affichaient
+  blancs, avec un texte blanc dessus, sur tous les thèmes sombres.
+
+- **Énergie : le seuil « Couper sous » se règle de 50 en 50 W** au lieu de 100,
+  avec des libellés plus courts pour ce seuil et pour le délai après allumage.
+  Le rapport du coût par usage garde ses colonnes alignées.
+
+- **Une pièce avec un seul capteur de CO2 n'affiche plus une jauge de qualité
+  d'air cassée.** L'indice demande des particules fines ; le CO2 garde sa
+  propre tuile.
+
+- **L'assistant vocal se charge de façon fiable** quand le dossier des
+  intégrations n'est plus dans le chemin de Home Assistant.
+
 ## 2.0.123 - 2026-09-10
 
 - **Un visiteur sur votre WiFi ne pilote plus votre maison sans votre accord.**
