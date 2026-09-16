@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.126 - 2026-09-17
+
+- **L'écran mural a son propre add-on.** Une box peut désormais afficher
+  son accueil sur un écran branché dessus, installé comme n'importe quel
+  autre add-on casasmooth.
+
+- **Les animations lumineuses (feu de cheminée, aurore boréale, tempête
+  électrique) ne s'arrêtent plus sur une lampe lente à répondre**, comme
+  les autres scènes déjà corrigées.
+
+- **Les icônes par pièce sont de retour**, dans la vue principale et dans
+  les réglages.
+
 ## 2.0.125 - 2026-09-16
 
 - **L'éclairage automatique ne clignote plus et obéit à la main.** Les boutons

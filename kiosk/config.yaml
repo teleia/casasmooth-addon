@@ -1,0 +1,107 @@
+# Add-on Home Assistant Supervisor — écran mural casasmooth.
+#
+# ADD-ON PUBLIÉ (16.09.2026), pas un add-on local. Ce fichier est le
+# GABARIT source de vérité, dans ce dépôt : `build_addon.yml` copie ce
+# fichier tel quel vers `casasmooth-addon/kiosk/config.yaml` à chaque
+# release, en substituant `version:`. Ne jamais éditer la copie côté
+# store — voir `docs/operations/kiosk_ecran_mural.md`.
+#
+# Pourquoi une liste `devices:` FIXE, surdimensionnée, jamais générée
+# ---------------------------------------------------------------------
+# `full_access: true` NE DONNE PAS accès au cgroup des périphériques DRM
+# sur ce Supervisor — constaté le 15.09.2026 (Luca) : "Operation not
+# permitted" en ouvrant /dev/dri/cardN même combiné à `apparmor: false`
+# et `privileged: [SYS_ADMIN]`. `full_access` n'agit d'ailleurs QUE si le
+# mode protection de l'add-on est désactivé (`/addons/<slug>/security`),
+# un réglage exclu du rôle manager — inautomatisable, vérifié le 16.09.
+#
+# Une liste `devices:` explicite règle l'accès. La crainte initiale
+# (Docker refuserait un chemin absent sur telle box) est FAUSSE sur ce
+# Supervisor : une entrée `devices:` qui ne correspond à aucun nœud réel
+# de l'hôte est simplement IGNORÉE à la création du conteneur
+# (`Ignore static device path`, supervisor/docker/app.py), et l'accès
+# est accordé à chaud si le périphérique apparaît plus tard (écouteur
+# matériel). Prouvé sur la .149 le 16.09.2026 (24 entrées dont 20
+# absentes de cette box → install 200, cgroup = seuls les 4 nœuds réels,
+# `/dev/dri/card0` et `/dev/input/event0` s'ouvrent). Une liste fixe et
+# large couvre donc toutes les configurations connues (Pi 3/4/5, DSI ou
+# HDMI, plusieurs cartes, jusqu'à 16 périphériques d'entrée), sans rien
+# détecter par box — condition pour publier une image PRÉ-CONSTRUITE,
+# identique sur toute la flotte, comme l'add-on casasmooth lui-même.
+#
+# `host_network: true` : le kiosk vise l'app mobile casasmooth (pas Home
+# Assistant Core) en boucle locale — l'add-on casasmooth publie son webapp sur
+# :28100 (app/api/server.py, `uvicorn.run(..., port=28100)`), atteignable en
+# 127.0.0.1 depuis le réseau hôte. Jamais le nom du conteneur casasmooth,
+# conformément à ARCHITECTURE.md §2 ("Never expose casasmooth-* container
+# names to a browser").
+#
+# `kiosk_url` : l'app mobile de la box en `?context=kiosk`, SANS aucune
+# crédence — c'est le point de tout l'add-on. Ce contexte est une porte
+# NOMMÉE de l'AuthMiddleware (app/api/server.py) : la box y rend le rôle
+# `anonymous` — l'accueil en lecture, aucun geste (`refuse_guest_action`),
+# surface propriétaire fermée — et jamais `internal`, alors que l'appel vient
+# bien de 127.0.0.1 (les deux add-ons sont en `host_network`). Un jeton
+# d'appareil n'est donc pas nécessaire pour AFFICHER ; en donner un pour
+# PILOTER depuis le mur reste un chantier séparé (16.09.2026). Sans ce
+# contexte, `?kiosk=…` menait à l'écran de connexion : l'app se déclarait
+# `standalone`, que la box refuse d'office sans jeton.
+#
+# `watchdog` : PAS ici — en manifeste, `watchdog:` est une URL de sonde HTTP/
+# TCP, et le kiosk n'écoute rien. C'est le réglage Supervisor par
+# installation (`/addons/<slug>/options`, `watchdog: true`, posé par
+# cs_provision_kiosk.py comme pour Music Assistant) qui relance le conteneur
+# quand cage/chromium — son PID 1 — meurt, au lieu de laisser le mur noir
+# jusqu'au prochain cs_update.
+#
+# `apparmor: false` : c'est ce qui a permis de sortir du blocage VT initial,
+# avant qu'on isole `SEATD_VTBOUND=0` comme la vraie cause (voir
+# entrypoint.sh). Gardé par prudence — repasser à `true` n'a pas été
+# retesté après coup ; à vérifier avant de le retirer.
+name: "casasmooth Kiosk"
+description: "Écran mural en mode kiosk casasmooth — actif seulement si un écran est branché."
+url: "https://github.com/teleia/casasmooth-addon"
+slug: kiosk
+# Substitué par `build_addon.yml` (job sync-addon-repo) à chaque release —
+# jamais bumpé ici : ce gabarit suit le VERSION du dépôt casasmooth.
+version: "2.0.126"
+image: "ghcr.io/teleia/casasmooth-kiosk-{arch}"
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+apparmor: false
+host_network: true
+map:
+  - type: addon_config
+    read_only: false
+devices:
+  - /dev/dri/card0
+  - /dev/dri/card1
+  - /dev/dri/card2
+  - /dev/dri/card3
+  - /dev/dri/renderD128
+  - /dev/dri/renderD129
+  - /dev/dri/renderD130
+  - /dev/dri/renderD131
+  - /dev/input/event0
+  - /dev/input/event1
+  - /dev/input/event2
+  - /dev/input/event3
+  - /dev/input/event4
+  - /dev/input/event5
+  - /dev/input/event6
+  - /dev/input/event7
+  - /dev/input/event8
+  - /dev/input/event9
+  - /dev/input/event10
+  - /dev/input/event11
+  - /dev/input/event12
+  - /dev/input/event13
+  - /dev/input/event14
+  - /dev/input/event15
+options:
+  kiosk_url: "http://127.0.0.1:28100/?context=kiosk"
+schema:
+  kiosk_url: url
