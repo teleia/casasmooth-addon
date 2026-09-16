@@ -1,5 +1,50 @@
 # Changelog
 
+## 2.0.125 - 2026-09-16
+
+- **L'éclairage automatique ne clignote plus et obéit à la main.** Les boutons
+  100 % / 50 % gardent leur état au lieu d'osciller, un variateur ou un bouton
+  mural physique est reconnu comme un geste volontaire, le seuil de luminosité
+  n'éteint plus jamais une pièce par lui-même, et le retour en mode automatique
+  rallume une pièce sombre et occupée en quelques secondes au lieu de plusieurs
+  minutes.
+
+- **Le retour en mode automatique après une extinction manuelle est fiable.**
+  Un garde-fou interne pouvait annuler ce rallumage ; il ne le fait plus.
+
+- **Une maison peut être découpée en logements.** Pour un immeuble, une
+  colocation ou une location saisonnière : chaque occupant ne voit et ne
+  commande que son logement, pour la durée de son séjour, y compris l'invité
+  qui a scanné le code QR. Une maison sans logements déclarés ne change
+  strictement rien.
+
+- **Un bâtiment de plusieurs box se pilote depuis une seule.** L'exploitant
+  voit ses logements nommés, leur état résumé, et les commande depuis
+  l'application ou par l'assistant. Sans effet sur une box seule.
+
+- **L'application en paysage et sur tablette.** Rail de navigation à gauche,
+  barre en haut, thème graphite, et un accueil « tablette » qui reprend vos
+  panneaux favoris en simple, pour un appareil posé sur un mur ou un meuble.
+
+- **Deux pièces du même nom se distinguent enfin**, partout dans l'application
+  et dans les commandes vocales.
+
+- **Loxone : les lampes d'une commande d'éclairage groupée sont créées
+  individuellement**, et le bouton d'administration reflète l'état réel.
+
+- **Catalogue : la caméra et la vanne d'eau** sont des rôles reconnus lors
+  d'un relevé.
+
+- **Le logo d'un partenaire s'affiche correctement**, quel que soit son format.
+
+- **Les traductions de l'interface sont complètes à nouveau.** Une mise à jour
+  automatique en avait perdu les trois quarts.
+
+- **Écran mural (en préparation).** La box sait désormais afficher son accueil,
+  sans connexion, sur un écran qu'on lui branche. Cette version pose les
+  fondations ; l'installation automatique de l'écran arrive dans une prochaine
+  version.
+
 ## 2.0.124 - 2026-09-13
 
 - **Les lumières sur détecteur s'éteignent à l'heure prévue, même après un
