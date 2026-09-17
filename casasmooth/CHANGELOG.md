@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.127 - 2026-09-17
+
+- **Éteindre une deuxième fois de suite tient, pour de bon.** Si l'automatique
+  rallume une pièce trop vite après un premier appui, un second appui coupe
+  vraiment — la pièce reste éteinte jusqu'à ce qu'elle soit vide, plutôt que de
+  se rallumer seule.
+
+- **Éteindre en sortant ne se fait plus rallumer par erreur.** L'automatique
+  attend désormais une vraie nouvelle détection de présence avant de rallumer,
+  au lieu de se fier à un capteur qui n'a pas encore eu le temps de confirmer
+  le départ.
+
 ## 2.0.126 - 2026-09-17
 
 - **L'écran mural a son propre add-on.** Une box peut désormais afficher
