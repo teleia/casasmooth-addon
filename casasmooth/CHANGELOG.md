@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.0.128 - 2026-09-21
+
+- **Les télécommandes et dimmers font enfin ce qu'on attend d'eux.** Un appui
+  simple allume la pièce avec les réglages de la période en cours (pas un
+  100 % brutal) ; un double appui force le 100 % ; le bouton « O » des
+  télécommandes IKEA éteint vraiment ; le double appui d'un bouton SONOFF
+  n'est plus pris pour un simple. Et quand la période ne prévoit aucun
+  éclairage (la nuit, typiquement), un appui volontaire allume à 100 % au
+  lieu de ne rien faire.
+
+- **Les interrupteurs muraux Shelly de dernière génération sont reconnus.**
+  Un Shelly 1 Mini Gen4 posé derrière un bouton-poussoir pilote désormais
+  toute la pièce comme un interrupteur classique — appui simple pour
+  basculer, double appui pour le 100 % — quel que soit son firmware.
+
+- **Un relais qui alimente des lampes ordinaires ne se rallume plus tout
+  seul.** Quand casasmooth présume à tort qu'un interrupteur alimente une
+  ampoule connectée (et le maintient allumé de force), l'habitant peut le
+  corriger en posant le label `cs_not_detached` sur le relais dans Home
+  Assistant.
+
+- **V-ZUG : un appareil éteint n'est plus signalé comme une erreur.**
+
 ## 2.0.127 - 2026-09-17
 
 - **Éteindre une deuxième fois de suite tient, pour de bon.** Si l'automatique

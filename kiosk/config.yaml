@@ -64,7 +64,7 @@ url: "https://github.com/teleia/casasmooth-addon"
 slug: kiosk
 # Substitué par `build_addon.yml` (job sync-addon-repo) à chaque release —
 # jamais bumpé ici : ce gabarit suit le VERSION du dépôt casasmooth.
-version: "2.0.127"
+version: "2.0.128"
 image: "ghcr.io/teleia/casasmooth-kiosk-{arch}"
 arch:
   - amd64
