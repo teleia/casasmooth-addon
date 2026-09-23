@@ -64,7 +64,7 @@ url: "https://github.com/teleia/casasmooth-addon"
 slug: kiosk
 # Substitué par `build_addon.yml` (job sync-addon-repo) à chaque release —
 # jamais bumpé ici : ce gabarit suit le VERSION du dépôt casasmooth.
-version: "2.0.128"
+version: "2.0.129"
 image: "ghcr.io/teleia/casasmooth-kiosk-{arch}"
 arch:
   - amd64
@@ -73,6 +73,12 @@ startup: application
 boot: auto
 apparmor: false
 host_network: true
+# `udev: true` : monte la base udev de l'hôte (lecture seule, /run/udev) —
+# `libinput` (souris, tactile) énumère ses périphériques par udev. Sans elle,
+# entrypoint.sh désactivait TOUTE entrée (WLR_LIBINPUT_NO_DEVICES=1) : pas de
+# curseur, constaté le 21.09.2026 sur la .217 avec une souris USB. Le repli
+# sans entrée reste dans entrypoint.sh si cage refuse de démarrer.
+udev: true
 map:
   - type: addon_config
     read_only: false

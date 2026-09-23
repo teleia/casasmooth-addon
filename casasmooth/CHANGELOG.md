@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.0.129 - 2026-09-23
+
+- **L'interrupteur mural à poussoir obéit enfin, et simplement.** Un appui
+  bref bascule la pièce, un appui maintenu (plus d'une seconde) allume tout
+  à 100 %, un double appui aussi. C'est l'appareil lui-même qui dit quel
+  geste a été fait — plus aucune interprétation de notre côté. Et si le
+  bouton reste mécaniquement coincé, un appui qui ne s'ouvre que bien plus
+  tard est quand même compris comme un appui.
+
+- **Une scène enregistrée « toutes lampes éteintes » est enfin respectée.**
+  Une pièce dont la scène dit « ici, de jour, aucune lampe » ne se rallumait
+  pas moins à 100 % à chaque détection. Une scène que vous avez enregistrée
+  s'applique désormais telle quelle, même quand elle n'allume rien.
+
+- **Une pièce ne reste plus bloquée en manuel à cause d'un capteur muet.**
+  Quand un capteur de présence devenait illisible, la pièce pouvait rester
+  figée des heures et ne plus s'allumer du tout en rentrant. Un capteur
+  illisible n'est plus pris pour quelqu'un dans la pièce, et quitter la
+  pièce remet vraiment le compteur d'extinctions à zéro.
+
+- **L'écran mural gagne la souris et le tactile**, redémarre de lui-même
+  quand la mémoire devient trop juste, et s'installe désormais même si la
+  génération de la configuration a échoué.
+
+- **Le plan 3D retrouve la poignée de déplacement des lampes**, invisible
+  depuis plusieurs mois.
+
 ## 2.0.128 - 2026-09-21
 
 - **Les télécommandes et dimmers font enfin ce qu'on attend d'eux.** Un appui
