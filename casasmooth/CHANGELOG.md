@@ -1,5 +1,33 @@
 # Changelog
 
+## 2.0.131 - 2026-09-24
+
+- **Un menu « Système » dans les réglages, pour dépanner sans rien savoir de
+  technique.** Il affiche l'adresse IP de votre box, sa charge, sa mémoire,
+  son espace disque et depuis combien de temps elle tourne. C'est ce qu'on
+  vous demandera quand vous appellerez parce que « ça rame » ou parce que la
+  box est introuvable sur le réseau. L'information n'est cherchée qu'au
+  moment où vous ouvrez le menu.
+
+- **Le lien vers le site web ne vous fait plus quitter l'application.**
+  Depuis les réglages, il ouvrait le site dans une page dont on ne pouvait
+  plus revenir : il fallait fermer et rouvrir l'application. Le site
+  s'affiche maintenant dans l'onglet « À propos », avec la barre de
+  navigation toujours là pour rentrer.
+
+- **Les tarifs dynamiques tiennent dans le quota du fournisseur.** La box
+  interrogeait Swisspower bien plus souvent que nécessaire et s'entêtait
+  quand le quota était atteint, ce qui prolongeait le blocage. Elle espace
+  désormais ses appels, patiente le temps demandé, et se contente de la
+  courbe déjà en mémoire quand celle-ci couvre la période — de près d'une
+  centaine d'appels par jour à quelques-uns. Si plus rien ne répond pendant
+  huit heures, la surveillance le signale au lieu de servir un prix muet.
+
+- **Vos identifiants de fournisseur d'électricité ne redescendent plus
+  jamais vers le navigateur.** L'écran de configuration indique seulement
+  qu'un jeton est enregistré ; laisser le champ vide le conserve tel quel.
+  Les journaux n'en gardent plus trace non plus.
+
 ## 2.0.129 - 2026-09-23
 
 - **L'interrupteur mural à poussoir obéit enfin, et simplement.** Un appui
