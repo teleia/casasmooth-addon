@@ -1,5 +1,73 @@
 # Changelog
 
+## 2.0.132 - 2026-09-26
+
+- **La présence refonctionne quand une pièce porte un numéro** (« 15
+  Extérieur », « 80 Bain »…). Un interrupteur d'une telle pièce, retenu comme
+  indice de présence, faisait tomber d'un coup des centaines de capteurs, dont
+  celui qui dit si la maison est occupée : une maison habitée pouvait être
+  jugée vide, puis armée et verrouillée. Tous ces capteurs sont de nouveau
+  calculés.
+
+- **Une formule fautive ne fait plus disparaître un groupe entier de
+  capteurs.** Home Assistant rejetait d'un bloc tous les capteurs d'un même
+  fichier dès qu'une seule de leurs formules était invalide, sans rien
+  signaler. Chaque formule générée est désormais vérifiée avant d'être
+  écrite : une erreur ne coûte plus que son propre capteur, et elle est
+  consignée dans le journal et le rapport quotidien.
+
+- **L'accueil et le rappel « portes ouvertes » suivent chaque personne.**
+  Chaque arrivée est accueillie, même la deuxième, et même quand le départ
+  n'avait pas été enregistré (téléphone éteint). Un téléphone resté sur la
+  table de nuit ne provoque plus de faux retour en pleine nuit. Le rappel des
+  portes et fenêtres part quand la maison se vide vraiment, et non au premier
+  départ.
+
+- **Votre box sait dialoguer avec le gestionnaire de réseau selon le standard
+  SmartGridready.** Un distributeur peut lire la puissance au raccordement et
+  les caractéristiques de l'installation, et demander une réduction ou un
+  blocage temporaire, avec les outils officiels du standard. Rien n'est ouvert
+  par défaut : il ne peut agir sur vos appareils que si cet accès lui est
+  accordé dans la configuration. Chaque commande reçue est enregistrée, avec
+  ce que la box en a réellement fait.
+
+- **Les états SG-Ready ont désormais le sens de la norme.** L'état 2 veut
+  dire « fonctionnement normal » et l'état 3 « enclenchement recommandé »,
+  comme pour toute pompe à chaleur SG-Ready. casasmooth les comptait
+  autrement : un « retour au normal » envoyé par un gestionnaire de réseau
+  pouvait baisser le chauffage. Le mode économie de casasmooth (« réduit »)
+  reste disponible pour les appareils pilotés par consigne. Une configuration
+  SG-Ready écrite avant ce changement reste inactive jusqu'à sa mise à jour,
+  plutôt que d'agir à contresens.
+
+- **Les tarifs dynamiques au nouveau format de la branche (VSE v2) sont
+  compris.** Les fournisseurs qui passeront à ce format au 1er janvier 2027
+  continueront d'alimenter l'optimisation ; sans ce correctif, leurs prix
+  seraient arrivés vides, sans aucune alerte.
+
+- **Le tactile de l'écran mural répond enfin.** Annoncé dans une version
+  précédente, il ne marchait pas : les appuis arrivaient jusqu'au navigateur
+  sans jamais être pris en compte. L'écran mural repose désormais sur une
+  base système plus récente, qui les traite. Un écran relié à la box par
+  nappe (connecteur DSI) est aussi reconnu, alors que l'affichage restait
+  bloqué sur la console ; si un écran HDMI est branché en même temps, c'est
+  lui qui l'emporte.
+
+- **Ni curseur ni bulle de traduction plantés sur l'écran mural.** Un
+  pointeur restait immobile au milieu de l'écran même sans souris, et le
+  navigateur proposait de traduire la page dans une bulle que personne ne
+  pouvait fermer. Les deux ont disparu.
+
+- **L'écran mural se met à jour tout seul après un changement de
+  configuration.** Une pièce ou des appareils ajoutés n'y apparaissaient
+  qu'après un redémarrage manuel de l'écran ; il se recharge désormais de
+  lui-même dans les cinq minutes.
+
+- **Le tutoriel ne bloque plus l'écran mural sur la connexion à Home
+  Assistant.** L'étape qui présente le tableau de bord Home Assistant
+  ouvrait sa page de connexion en plein écran, sans moyen d'en revenir ;
+  l'écran mural affiche désormais le même message qu'un invité.
+
 ## 2.0.131 - 2026-09-24
 
 - **Un menu « Système » dans les réglages, pour dépanner sans rien savoir de
