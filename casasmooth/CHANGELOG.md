@@ -1,5 +1,32 @@
 # Changelog
 
+## 2.0.134 - 2026-09-27
+
+- **Correctif de sécurité : installez cette mise à jour sans attendre.** Un
+  appareil branché sur le réseau local de la maison, sans aucun identifiant,
+  pouvait encore agir sur la box par plusieurs portes : couper son
+  authentification, y restaurer une sauvegarde de son choix, commander la
+  maison par l'assistant vocal, créer ou supprimer des automatisations,
+  modifier les réglages de sécurité (mode absence, alarmes), reprendre le
+  pont Matter ou s'abonner aux notifications d'alarme du foyer. Ces gestes
+  sont désormais réservés aux habitants. L'écran mural et l'accueil des
+  invités ne changent pas ; la restauration d'une sauvegarde et l'adresse
+  e-mail du propriétaire restent possibles pendant la première installation,
+  avant qu'un propriétaire existe.
+
+- **Une nouvelle box est rattachée à son propriétaire sans redémarrage.**
+  Le cloud n'accepte plus un changement de propriétaire que de la box
+  elle-même ; une box neuve prouvait son identité seulement après un
+  redémarrage de l'add-on, elle le fait désormais dès son premier
+  démarrage.
+
+- **Les exemples de configuration SmartGridready sont justes.** Les règles
+  d'exemple écrivent les points que les profils publiés déclarent, sous les
+  noms que les descriptions officielles des appareils attendent ; le
+  chauffe-eau et la borne de recharge y obéissent aux ordres du
+  gestionnaire de réseau. La déclaration « Communicator » de casasmooth est
+  valide contre le schéma du standard.
+
 ## 2.0.133 - 2026-09-27
 
 - **Vous décidez vous-même qui peut piloter votre maison par l'interface
