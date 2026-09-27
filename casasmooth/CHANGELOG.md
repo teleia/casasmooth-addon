@@ -1,5 +1,40 @@
 # Changelog
 
+## 2.0.133 - 2026-09-27
+
+- **Vous décidez vous-même qui peut piloter votre maison par l'interface
+  réseau SmartGridready.** L'accès passe désormais par des jetons que vous
+  créez dans l'app, sous Énergie › Réseau (mode expert). Un jeton GRD est
+  destiné à un gestionnaire de réseau avec qui vous avez un accord : il
+  n'agit sur vos appareils que si l'accès en écriture est accordé. Un jeton
+  de simulation sert aux essais, et se crée aussi depuis la section
+  SmartGridReady du tableau de bord : il commande vos appareils pour de vrai,
+  mais une heure au plus par commande, jamais contre une vraie commande du
+  réseau, et il expire après sept jours. Un jeton ne s'affiche qu'une fois ;
+  le révoquer arrête aussitôt ce qu'il avait mis en vigueur.
+
+- **Le cloud casasmooth ne détient plus aucune clé de votre maison.** La clé
+  qui ouvrait l'interface réseau n'est plus transmise au cloud, et elle est
+  remplacée au premier démarrage de cette version. Seuls les jetons que vous
+  avez créés ouvrent désormais cette interface.
+
+- **Les appareils SmartGridready lus en Modbus donnent leurs vraies
+  valeurs.** Une valeur mise à l'échelle par l'appareil (un pourcentage, une
+  puissance en dixièmes…) était lue ou écrite dix, cent ou mille fois trop
+  grande ou trop petite. Aucune installation connue ne lisait une telle
+  valeur ; la correction vient de la bibliothèque officielle du standard.
+
+- **Un appareil injoignable n'est plus annoncé « connecté ».** Quand la
+  liaison Modbus d'un appareil était coupée, le démarrage le comptait quand
+  même parmi les appareils connectés, puis chaque commande échouait en
+  silence. Il apparaît désormais comme injoignable, avec la raison, et une
+  adresse mal renseignée est signalée dans le journal.
+
+- **L'ajout d'un appareil découvert suit sa description officielle.** Les
+  réglages de connexion prennent les noms que la description de l'appareil
+  attend, et l'app signale ce qu'il faut vérifier avant de l'activer (liaison
+  série, adresse figée par le fabricant…).
+
 ## 2.0.132 - 2026-09-26
 
 - **La présence refonctionne quand une pièce porte un numéro** (« 15
