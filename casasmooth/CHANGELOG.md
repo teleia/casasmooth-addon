@@ -1,5 +1,107 @@
 # Changelog
 
+## 2.0.136 - 2026-10-01
+
+- **La liaison entre la box et le cloud casasmooth est chiffrée.** Les
+  mesures que la box envoie au cloud et les ordres qu'elle en reçoit
+  circulaient en clair sur Internet ; ils passent désormais par une
+  connexion chiffrée, et la box vérifie qu'elle parle bien au serveur
+  casasmooth. Rien à faire : la bascule se fait à la mise à jour, et le
+  service MQTT de Home Assistant redémarre une fois.
+
+- **Le lien avec le cloud tient mieux.** Une panne passagère du cloud au
+  moment d'une mise à jour ne coupe plus l'envoi des mesures jusqu'à la
+  mise à jour suivante : la box garde la configuration qu'elle connaissait.
+  Sur une box neuve, ce lien est désormais réellement chargé par le service
+  MQTT de Home Assistant, qui l'ignorait tant que son option de
+  personnalisation restait désactivée.
+
+- **Portier : sonnette et ouvre-porte.** Une sonnette (DoorBird, Reolink,
+  bouton de sonnette raccordé à un module Shelly…) et une gâche électrique
+  sont reconnues comme telles. Une gâche n'est plus prise pour un
+  interrupteur d'éclairage, qu'une automatisation de lumière pouvait
+  actionner. La vue Sécurité gagne une section « Accès / Portier » :
+  sonnettes, ouvre-porte avec confirmation, et l'historique de qui a
+  ouvert. Le relais d'une gâche est coupé 5 secondes après son ouverture,
+  quel que soit le chemin qui l'a ouverte.
+
+- **Avec la Sécurité améliorée, un coup de sonnette vous prévient.** La
+  notification porte l'image de la caméra du portier et un bouton
+  « Ouvrir ». L'ouverture à distance n'est acceptée que si l'alarme est
+  désarmée ou si vous avez autorisé le déverrouillage à distance ; un refus
+  vous est signalé. Alarme armée, ou si vous l'avez demandé, la box vous dit
+  qui a ouvert la porte.
+
+- **L'application affiche « On sonne ».** Pendant 45 secondes, sur le
+  téléphone comme sur l'écran mural. Le propriétaire voit la caméra et
+  ouvre en deux temps (armer, puis confirmer) : un simple effleurement
+  n'ouvre pas la porte. L'écran mural et l'appareil d'un invité voient la
+  sonnette seule et ne peuvent pas ouvrir la porte d'entrée ; l'hôte d'un
+  séjour déclaré (location) dispose de l'ouvre-porte, sans la caméra.
+
+- **L'écran mural a son propre accès.** À l'installation, la box lui remet
+  un accès permanent et révocable, avec les mêmes limites qu'un appareil
+  invité, sans date d'échéance : il n'a plus à se présenter comme un
+  appareil anonyme.
+
+- **Le thermostat de radiateur Aqara W600 est pris en charge (Zigbee,
+  ZHA).** La vanne se règle depuis Home Assistant ; la box installe le
+  module de compatibilité nécessaire à chaque mise à jour.
+
+- **Frigate : fin des redémarrages en boucle.** Avec l'add-on Frigate
+  « Full Access », la box croyait Frigate arrêté, parce que son indicateur
+  change de nom avec la variante de l'add-on et la langue : elle le
+  redémarrait toutes les 15 minutes et envoyait des courriels d'alerte. Elle
+  le reconnaît désormais dans toutes ses variantes.
+
+- **SmartGridready : un onduleur SunSpec reste identifié** après une
+  réponse Modbus illisible. La box se reconnecte au lieu de décaler toutes
+  les lectures suivantes, ce qui rendait l'onduleur méconnaissable.
+
+- **Des capteurs mieux reconnus.** Une sonde de CO₂, de luminosité, de COV
+  ou de particules arrivée par MQTT rejoint sa catégorie (qualité de l'air,
+  éclairage selon la luminosité) ; la température interne d'une puce ou
+  d'un appareil (ballon, pompe à chaleur) n'est plus prise pour celle de la
+  pièce ; les prévisions Forecast.Solar ne mêlent plus demain à
+  aujourd'hui.
+
+## 2.0.135 - 2026-09-30
+
+- **Correctif de sécurité : la box refuse par défaut toute modification
+  venant d'un appareil non identifié.** Jusqu'ici, chaque fonction se
+  protégeait elle-même et un appareil du réseau local était cru sur
+  parole : une fonction oubliée restait ouverte. Désormais, un appareil
+  anonyme, l'écran mural ou un invité ne peut rien modifier sur la box, à
+  l'exception d'une courte liste de gestes autorisés un par un (ceux de
+  l'écran mural, ceux accordés à un invité). La
+  remise à zéro de la box et la connexion à un autre Wi-Fi sont fermées aux
+  invités ; l'inventaire des conversations avec l'assistant est réservé aux
+  habitants.
+
+- **L'ancienne porte d'entrée SmartGridready est fermée à distance.** Elle
+  n'est plus joignable par l'accès distant et son ancien mot de passe
+  n'ouvre plus rien. Un gestionnaire de réseau passe par l'interface
+  SmartGridready officielle, avec son propre accès. L'interrupteur « Allow
+  Remote GRD Simulation » disparaît.
+
+- **La conversation vocale en direct est réservée au foyer et aux invités
+  autorisés.** Chaque conversation est facturée au propriétaire : un
+  appareil anonyme ne peut plus en ouvrir. L'écran mural n'envoie plus
+  l'état de sa batterie et de sa connexion, que la box lui refusait.
+
+- **Un ordre du gestionnaire de réseau est appliqué sans délai.** Un
+  appareil retenu par son délai anti-battement (le chauffe-eau, par
+  exemple, 30 minutes) retardait la réponse de la box au-delà du temps de
+  réaction qu'elle promet au gestionnaire de réseau. Seules les limites
+  déclarées de l'appareil (marche minimale, blocage maximal) comptent
+  désormais ; le retour à la normale qui suit la levée de l'ordre est lui
+  aussi immédiat.
+
+- **Application mobile : les vues « Détails » et « À propos » occupent tout
+  l'écran.** Le cadre laissait une marge autour de lui en paysage et
+  pouvait glisser en portrait en laissant une bande vide au-dessus de la
+  barre de conversation.
+
 ## 2.0.134 - 2026-09-27
 
 - **Correctif de sécurité : installez cette mise à jour sans attendre.** Un
