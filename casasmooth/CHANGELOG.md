@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.0.137 - 2026-10-02
+
+- **Les boutons à icône disent ce qu'ils font.** Au survol de la souris,
+  chaque bouton qui ne montre qu'une icône affiche son rôle : scènes,
+  automatisations et raccourcis des pièces, scènes et animations de la vue
+  Éclairage, graphique, réglages, marche/arrêt et pilotage automatique des
+  appareils de la vue Énergie, notifications et réglages de la
+  surveillance, annonces, rappels du calendrier et notifications des
+  vannes. Sur un écran tactile, rien ne change.
+
+- **Abonnement sur mesure.** L'équipe casasmooth peut désormais vous
+  proposer un abonnement négocié : un prix mensuel et une liste de
+  services convenus ensemble, réglé par carte comme tout autre abonnement.
+  Il ne vous donne jamais moins que le Freemium, et les services
+  additionnels restent disponibles en plus. Votre abonnement et ses
+  services s'affichent sur la page Tarifs du site.
+
 ## 2.0.136 - 2026-10-01
 
 - **La liaison entre la box et le cloud casasmooth est chiffrée.** Les
