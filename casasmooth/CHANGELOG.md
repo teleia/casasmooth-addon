@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.138 - 2026-10-04
+
+- **« casasmooth zones ».** Vos pièces et leurs appareils sur une seule page,
+  avec un plan d'installation et les appareils conseillés pour chaque pièce.
+
+- **Éclairage adapté à la lumière du jour.** Deux points par période relient
+  la lumière mesurée à la luminosité des lampes.
+
+- **Paramètres standard en un geste.** Un bouton complète les réglages encore
+  jamais faits d'une pièce, ou de toutes ; « Annuler » remet tout comme avant.
+
+- **Pages de réglages harmonisées** sur le thème et la langue de Home Assistant.
+
+- **Sécurité renforcée** des accès à la box.
+
 ## 2.0.137 - 2026-10-02
 
 - **Les boutons à icône disent ce qu'ils font.** Au survol de la souris,
