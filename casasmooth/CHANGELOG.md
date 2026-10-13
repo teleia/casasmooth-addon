@@ -1,5 +1,31 @@
 # Changelog
 
+## 2.0.139 - 2026-10-13
+
+- **App mobile : deux nouvelles pages.** « Sécurité » réunit l'état de
+  l'alarme et des ouvertures, la présence, les serrures, la sécurité vitale
+  et le journal des dernières 24 h. « Météo & air » montre la station
+  extérieure, la prévision et la qualité de l'air de chaque pièce.
+
+- **La qualité de l'air de la maison ne compte plus les annexes.** Cave,
+  garage, buanderie ou local technique restent affichés et conseillés, mais
+  ne font plus baisser la note de toute la maison.
+
+- **Enregistrer une scène demande confirmation.** Un appui de trop sur une
+  flèche n'écrase plus une scène mémorisée.
+
+- **Rejeu de l'éclairage plus sûr.** L'arrêter n'allume plus de lampes et
+  laisse la maison dans l'état attendu ; il ne rejoue plus une journée qui
+  laisserait la maison dans le noir, et rallume aussi prises et lampes
+  simples.
+
+- **Accès et confidentialité.** Les consoles d'administration exigent un
+  administrateur Home Assistant, et vous pouvez refuser le support à
+  distance.
+
+- **Corrections** : chargement de l'app mobile, mesures d'humidité et de COV,
+  alertes gaz, chauffage en absence, réponses de l'assistant.
+
 ## 2.0.138 - 2026-10-04
 
 - **« casasmooth zones ».** Vos pièces et leurs appareils sur une seule page,

@@ -129,8 +129,10 @@ is written.
 
 ## Voice Assistant
 
-casasmooth wires a fully local-first voice pipeline on first boot,
-beyond simply installing Whisper and Piper:
+casasmooth wires a voice pipeline on first boot, beyond simply installing
+Whisper and Piper. Speech recognition and synthesis run locally; the
+assistant's answers come from a hosted language model, so a conversation
+needs internet:
 
 - **Whisper** STT (`core_whisper`) — installed and started.
 - **Piper** TTS (`core_piper`) — installed and started.
@@ -138,10 +140,11 @@ beyond simply installing Whisper and Piper:
   Whisper and Piper add-ons via their internal hostnames.
 - **Extended OpenAI Conversation** custom component — installed under
   `/config/custom_components/`, registered as a HA integration, and
-  configured to use casasmooth's LLM gateway (OpenRouter primary for
-  conversational tool-calling, Infomaniak fallback for Swiss data
-  residency on bulk text). The API key is read from the addon's
-  secret store; no manual YAML editing is required.
+  configured to call OpenRouter directly (the model is set by the
+  installation's `OPENROUTER_CHAT_MODEL` secret). This path does not go
+  through the fallback gateway that serves casasmooth's own bulk text
+  generation, so it has no automatic fallback. The API key is read from
+  the addon's secret store; no manual YAML editing is required.
 - **Voice pipeline** — created with `stt.faster_whisper` + `tts.piper`
   bound to the casasmooth assistant agent. Marked as the preferred
   pipeline so the HA mobile app and Wyoming satellites pick it up
