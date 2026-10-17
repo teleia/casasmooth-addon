@@ -1,5 +1,42 @@
 # Changelog
 
+## 2.0.140 - 2026-10-17
+
+- **Musique de la maison.** La page Media et l'onglet Media de l'app montrent
+  les mêmes lecteurs, ceux de Music Assistant, avec leurs groupes et le volume
+  de chaque lecteur ; le volume d'un groupe garde l'équilibre réglé entre ses
+  enceintes. Dans la page Media, lecteurs et télés se rangent par zone,
+  avec leur pochette, et « Toute la maison » lance la playlist partout. Une
+  programmation par créneaux lance une playlist dans une pièce aux heures et aux
+  jours choisis, si vous le voulez seulement en présence.
+
+- **Surveillance bien-être d'une personne seule.** Dans la vue Monitor : une
+  pré-alerte « Je vais bien » à la personne, puis ses proches prévenus si rien
+  ne bouge. Elle reste éteinte tant que vous ne l'allumez pas. Les alertes du
+  Monitor se prennent en charge par « Je m'en occupe ».
+
+- **Invités : des séjours plutôt que des créneaux.** Une page Invités dans
+  l'app, l'e-mail d'accès dans la langue de l'invité, et des accès temporaires
+  pour les artisans. Les créneaux existants sont repris.
+
+- **Assistant vocal.** Plus rapide, il agit directement sur la maison, comprend
+  la langue de celui qui parle et fait confirmer les gestes sensibles, comme une
+  serrure ou l'alarme.
+
+- **Dans l'app** : un onglet Appareils dans l'énergie (marche, arrêt, mode Auto
+  et règles de chaque consommateur), les onglets Bien-être et Météo & air, un
+  accueil « Aperçu », « Se déconnecter », et la même langue que votre profil
+  Home Assistant.
+
+- **Tableaux de bord** : pour ajouter un appareil, l'accueil présente d'abord
+  casasmooth zones. La vue Overview disparaît (tout allumer et tout éteindre
+  passent dans l'en-tête de l'accueil), la vue Systèmes rejoint
+  Administration, et un nouveau thème clair arrive : « Pearl ».
+
+- **Corrections** : stores refermés par une scène, couleurs des lampes après
+  une animation, pont Matter, heures saisies dans l'app, et une commande vocale
+  qui ne coupe plus l'automatisme.
+
 ## 2.0.139 - 2026-10-13
 
 - **App mobile : deux nouvelles pages.** « Sécurité » réunit l'état de
@@ -3143,6 +3180,10 @@ addon should pull and restart transparently.
   generator. The entity is no longer produced; orphan entries in
   `.storage/core.entity_registry` are cosmetic and can be cleaned up
   via the HA UI.
+  *Correction (14.10.2026) : c'était faux — `cs_dashboards.py` l'enregistrait
+  encore pour chaque zone à lumière variable, et le mobile en faisait une
+  tuile on/off qui ne pilotait plus rien. Retiré depuis ; l'étape
+  `cleanup_orphans` de la mise à jour retire l'entrée du registre.*
 
 ## 2.0.32 - 2026-04-27
 
