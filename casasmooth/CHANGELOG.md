@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.0.143 - 2026-10-28
+
+- **Vos favoris dans l'ordre que vous voulez.** Sur l'Aperçu, une poignée en
+  haut à droite de chaque tuile permet de la déplacer, au doigt, à la souris
+  ou au clavier. L'ordre suit votre compte sur tous vos appareils ; un tap sur
+  la tuile fonctionne comme avant.
+
+- **Un service plus stable aux heures de pointe.** Les box ne contactent plus
+  le cloud toutes à la même seconde : la mise à jour de la nuit, la sauvegarde,
+  la vérification des abonnements et les rapports partent chacun à un moment
+  tiré au hasard dans une fenêtre d'une demi-heure (par exemple la mise à jour
+  entre 02:00 et 02:30, la sauvegarde entre 03:15 et 03:45). Un bouton
+  « Mettre à jour » ou « Sauvegarder » pressé pendant cette attente est
+  désormais exécuté à la suite au lieu d'être ignoré.
+
 ## 2.0.142 - 2026-10-27
 
 - **Correctif.** La simulation de présence par l'éclairage, encore en test,
