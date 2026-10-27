@@ -1,5 +1,74 @@
 # Changelog
 
+## 2.0.142 - 2026-10-27
+
+- **Correctif.** La simulation de présence par l'éclairage, encore en test,
+  reçoit désormais la liste des lampes à allumer sur toutes les box : le
+  dossier où elle la dépose n'était pas créé, et le journal se remplissait
+  d'erreurs.
+
+## 2.0.141 - 2026-10-26
+
+- **Le chauffage confié à SmartGridready, et la main quand vous la voulez.**
+  Une pièce à climatiseur peut être chauffée par le moteur SmartGridready,
+  autour de sa consigne : un peu moins aux heures chères, un peu plus quand le
+  soleil produit. Couper le chauffage de la pièce dans casasmooth veut dire
+  « c'est moi qui contrôle » : plus rien n'y touche, sauf une demande du
+  réseau de baisser, après quoi votre consigne vous est rendue. Une mise en
+  marche à la main, comme la charge de la voiture, passe avant l'optimisation.
+
+- **Volets réglés comme on regarde la fenêtre.** Chaque volet se règle en
+  pourcentage de fenêtre couverte, avec « sens inversé » pour ceux qui
+  montent quand ils devraient descendre. Vos réglages actuels sont repris tels
+  quels : aucun volet ne bouge à la mise à jour.
+
+- **Photos au foyer.** Vos proches envoient photos et vidéos depuis une page
+  sécurisée, par un lien reçu par e-mail ; elles arrivent chiffrées et
+  défilent dans la visionneuse, en cadre photo sur un écran mural. Rien ne
+  s'allume tant que vous ne l'activez pas.
+
+- **Assistant.** Pendant une conversation vocale, un bouton coupe le micro
+  quand d'autres personnes parlent, et les petites phrases d'attente sont plus
+  courtes et plus rares. L'assistant connaît désormais vos consommateurs
+  d'énergie (puissance, énergie du jour, coût), le confort de chaque pièce,
+  l'électroménager et le bien-être, et répond la même chose au clavier et à la
+  voix.
+
+- **Vue 3D de la maison.** Elle peut aussi se dessiner depuis le plan de vos
+  pièces, étage par étage, avec les lampes allumées et l'état de chaque pièce
+  en direct, dans un onglet « Vue 3D » du tableau de bord.
+
+- **Accueil de l'app.** Des sections repliables, les pièces dans l'ordre de
+  la page Zones, et des cartes de pièce qu'on réordonne d'un glisser.
+
+- **Zones et appareils.** La fiche d'un appareil s'ouvre en fenêtre et dit ce
+  que casasmooth fait de chacune de ses entités, et pourquoi il en laisse une
+  de côté. ABB free@home, digitalSTROM et Wiser by Feller se raccordent depuis
+  l'onglet « Intégrations ».
+
+- **Éclairage : « au moins tant de lux ».** Par période, une pièce peut
+  garder une luminosité minimale au lieu de suivre une courbe.
+
+- **Sécurité : trois modes.** Désarmé, partiel (l'extérieur et les zones
+  sensibles, pendant que vous êtes à la maison) ou total. Le carillon de la
+  porte se coupe dans les réglages et respecte les heures calmes.
+
+- **Bien-être.** L'onglet de l'app est refait : l'état en tête, la pause et
+  le détail repliés en dessous.
+
+- **Énergie.** La reprise du courant injecté suit la règle de 2027 (le prix du
+  moment, plus le complément du minimum), et une limitation imposée par le
+  réseau retire aussi le « bon moment pour consommer ».
+
+- **Pour les intégrateurs.** Une automatisation d'intégrateur (`ix_`) peut
+  remplacer le chauffage, les volets ou l'éclairage d'une pièce : casasmooth
+  s'écarte, sans conflit.
+
+- **Corrections** : notifications reçues aussi par un compte non
+  administrateur, connexion à deux facteurs par l'accès à distance, pont
+  Matter, sécurité de l'accès à distance renforcée, et bandeau des cookies qui
+  ne revient plus dans l'app.
+
 ## 2.0.140 - 2026-10-17
 
 - **Musique de la maison.** La page Media et l'onglet Media de l'app montrent

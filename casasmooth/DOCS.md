@@ -251,8 +251,14 @@ It removes:
 
 - The casasmooth block from `/config/configuration.yaml`
 - The default dashboard pointer if a casasmooth dashboard is active
-- All `cs_*` labels
+- The labels casasmooth sets itself (the `cs_lights`, `cs_doors`… family labels), from the entities and from Home Assistant
 - casasmooth runtime artefacts on the HA host
+
+It keeps the labels a person chose (`cs_not_detached`, `cs_no_presence`,
+`cs_exterior_door`, `cs_announce_*`, `cs_rain`, `cs_simulated`, `csx_*`, the
+`cs_unit_*` of the rooms, and any other `cs_*` label created by hand): the
+list is printed at the end. Delete them in Home Assistant if you want them
+gone. The catalogue is in `docs/operations/labels.md`.
 
 After that, uninstall the add-on normally from Home Assistant.
 
