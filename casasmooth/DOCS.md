@@ -35,8 +35,8 @@ installation.
      `/config/casasmooth/locals/`
    - Configure the voice pipeline (Whisper STT + Piper TTS + Wyoming +
      Extended OpenAI Conversation)
-   - Provision Music Assistant if your subscription includes
-     `enhanced_media` (see "Music Assistant" below)
+   - Set up casasmooth music on your Sonos speakers if your
+     subscription includes `enhanced_media` (see "Music (Sonos)" below)
 
 4. Open the add-on's web UI from the sidebar (it uses HA ingress on
    port 28100), or browse directly to
@@ -78,7 +78,7 @@ The add-on container also has read-write access to two HA-wide shares:
 
 | Mount | HA Path | Use |
 |---|---|---|
-| `/media` | HA media library | Music files, camera recordings, etc. — exposed to Music Assistant when provisioned |
+| `/media` | HA media library | Camera recordings, photos, etc. |
 | `/share` | HA share folder | Cross-addon data exchange |
 
 Application data (`app/data/`) and multi-language text templates are
@@ -155,43 +155,31 @@ configuration step and only writes when something actually drifted.
 
 ---
 
-## Music Assistant
+## Music (Sonos)
 
-When your subscription includes the `enhanced_media` service, the
-`provision_music` step runs during `cs_update` and:
+When your subscription includes the `enhanced_media` service and Home
+Assistant shows at least one Sonos speaker (the native `sonos`
+integration, neither disabled nor hidden), casasmooth music plays on
+those speakers directly — periods, scheduling slots, exceptions, whole
+house, pauses — on the Media dashboard and in the casasmooth app.
+Nothing is installed for it.
 
-1. Registers the Music Assistant addon repository
-   (`github.com/music-assistant/home-assistant-addon`) with the
-   Supervisor.
-2. Installs and starts the **Music Assistant** add-on
-   (`d5369777_music_assistant`) if absent.
-3. Connects to MA's WebSocket API and ensures a **Filesystem (local
-   disk)** music provider exists pointing at `/media/music`.
-4. Copies five bundled public-domain demo MP3 files (Bach, Vivaldi,
-   Satie, Mozart, Chopin — ~55 MB total, included in the addon image)
-   into `/media/music/casasmooth/` so MA has a non-empty library out
-   of the box.
-5. Posts a persistent HA notification asking the user to open the
-   Music Assistant panel **once** — this triggers MA to spawn its
-   first Browser Player (`media_player.mass_*`), which is what
-   unlocks the enhanced sections of the Media dashboard (Now Playing,
-   Quick Moods, Music Library).
-
-The step is idempotent and best-effort: any failure is logged to
-`/config/casasmooth/logs/cs_provision_music.log` but never blocks the
-update. It is a no-op when `enhanced_media` is not subscribed.
-
-You can run it on demand without waiting for `cs_update`:
-
-```bash
-python3 -m app.cli.cs_main provision music
-```
-
-The dashboard opens the MA panel via the slug-based URL
-`/d5369777_music_assistant`. To wire the four Quick Moods buttons
-(`input_button.cs_media_mood_{morning,breakfast,dinner,night}`) to
-actual playlists, create HA automations that listen to those buttons
-and call `media_player.play_media`.
+- **Playlists are your Sonos favourites.** Add a playlist (Spotify,
+  radio, …) to "My Sonos" → Favourites in the Sonos app: it shows up in
+  the playlist selectors within five minutes, and casasmooth starts it
+  by its exact name. A remembered choice that no Sonos favourite
+  carries, or a favourite whose name casasmooth cannot pass to Sonos (a
+  space at the start or the end, a name like `2.50`), is listed on the
+  Media page.
+- **Music Assistant is no longer used.** casasmooth does not install it
+  any more; an add-on already installed is left in place
+  and stays in the daily backup while it runs. Speakers that are not
+  Sonos have no casasmooth music.
+- **Coming from Music Assistant**, the slots, exceptions, pauses and
+  choices of each speaker are kept (same Sonos = same room). One
+  notification names the remembered playlists that have no Sonos
+  favourite of the same name, and the rooms whose exceptions number
+  playlists (`p1`, `p2`, `p3`…, which now follow the Sonos favourites).
 
 ---
 
@@ -234,8 +222,7 @@ updating:
 - Static files (resources, commands, etc.) are synchronised
   automatically.
 - `cs_update` runs on the next boot and re-applies any new generation
-  steps (orphan cleanup, voice setup, Music Assistant provisioning,
-  …).
+  steps (orphan cleanup, voice setup, kiosk provisioning, …).
 
 ---
 
@@ -263,9 +250,9 @@ gone. The catalogue is in `docs/operations/labels.md`.
 After that, uninstall the add-on normally from Home Assistant.
 
 If you also want a full purge of the source tree, delete
-`/config/casasmooth/` manually after uninstall. Note that
-`/media/music/casasmooth/` will retain the demo MP3s; remove them
-manually if undesired.
+`/config/casasmooth/` manually after uninstall. On a box where an older
+casasmooth provisioned Music Assistant, `/media/music/casasmooth/` may
+still hold its demo MP3s; remove them manually if undesired.
 
 ---
 
@@ -283,13 +270,13 @@ Re-installing the casasmooth add-on triggers `install_deps.sh` again
 because the marker is recreated only on success. Alternatively,
 install the missing add-on manually from the HA add-on store.
 
-### Music Assistant did not appear / Now Playing card is empty
+### A playlist is missing or does not play
 
-`media_player.mass_*` only materialises **after** you visit the Music
-Assistant panel for the first time (it spawns a Browser Player). Open
-the MA panel from the HA sidebar, then refresh the Media dashboard.
-The fallback master player (first speaker) is used until then so the
-section is not empty.
+casasmooth plays the Sonos favourite of the same name. Add the playlist
+to "My Sonos" → Favourites in the Sonos app under exactly that name and
+wait up to five minutes. Right after Home Assistant starts, Sonos takes
+a moment to hand over its favourites: the app then says "try again in a
+moment" instead of playing.
 
 ### API not responding
 

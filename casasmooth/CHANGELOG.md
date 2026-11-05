@@ -1,5 +1,93 @@
 # Changelog
 
+## 2.0.144 - 2026-11-04
+
+- **Une limite d'injection, comme celle de soutirage.** Vous pouvez fixer ce que
+  la maison a le droit d'injecter au réseau. Si un onduleur que casasmooth sait
+  brider est relié, il le bride pour la tenir ; sinon l'app le dit, au lieu
+  d'annoncer une limite que rien ne tient. Un ordre de votre gestionnaire de
+  réseau qui coupe l'injection est tenu de la même façon.
+
+- **Le raccordement est surveillé toutes les 10 secondes.** Avant, un appareil
+  qui démarrait juste après un contrôle pouvait dépasser la limite de soutirage
+  jusqu'au contrôle suivant, cinq minutes plus tard. Maintenant casasmooth
+  réagit dans la minute, sans attendre.
+
+- **Énergie et puissance maximale, quart d'heure par quart d'heure.** Pour
+  chaque appareil piloté, et pour le soutirage et l'injection au raccordement,
+  casasmooth garde l'énergie, la puissance maximale et le temps passé
+  au-dessus de la limite. La série est consultable et se télécharge en CSV,
+  sur 25 mois.
+
+- **Les garanties d'origine entrent dans le prix d'injection.** Leur
+  rétribution se règle une fois ; elle s'ajoute au prix de l'énergie injectée
+  et à l'optimisation, sauf si votre tarif la comprend déjà. Le minimum légal
+  et le décompte trimestriel ne comparent que l'énergie, sans la prime.
+
+- **Les tarifs dynamiques se lisent mieux.** Une courbe de tarif dont la lecture
+  échoue est dite avec sa raison au lieu de disparaître. Un prix d'achat saisi
+  à la main passe avant la valeur ElCom de repli. Si le fournisseur change le
+  chemin de son tarif, casasmooth essaie l'autre chemin connu et garde celui
+  qui répond.
+
+- **Un ordre de votre gestionnaire de réseau qui coupe un appareil au niveau
+  « oublié » n'est plus écarté par le plafond du raccordement.**
+
+- **Une voiture dont l'état de charge n'est plus rafraîchi depuis plus de 24 heures
+  ne pilote plus le plan.** casasmooth retombe sur les heures de charge
+  prévues, au lieu de se fier à un état d'hier.
+
+- **Les tunnels reprennent plus vite et le disent mieux.** Une box absente
+  répond « indisponible » (503) au lieu d'une page introuvable, un réseau
+  absent ne déclenche plus une pause de quinze minutes, et le journal de
+  l'add-on porte le nombre de reconnexions.
+
+- **De la carte SD à « Pièces & appareils ».** Le premier démarrage d'une box
+  vous conduit pas à pas, de l'attente du démarrage jusqu'à la création des
+  zones.
+
+- **Les pièces et les tuiles se déplacent de nouveau à la souris** sur un PC à
+  écran tactile (le déplacement suivait le type de pointeur lu une seule fois
+  à l'ouverture).
+
+- **Les entités gardent leurs noms avec Home Assistant 2026.11.** Les tableaux
+  posent nos libellés, et la détection des doublons Loxone comme le modèle
+  sémantique suivent la nouvelle composition des noms.
+
+- **Music Assistant reste sauvegardé tant qu'il est installé.** Et le message
+  d'une notification de créneau sans lecteur est en français.
+
+- **Spotify et Sonos sans intermédiaire.** La musique automatique ne passe plus
+  par Music Assistant : les playlists proposées sont celles de « Mes favoris »
+  dans l'app Sonos, et Sonos les joue lui-même. Pour ajouter une playlist
+  Spotify, ajoutez-la dans l'app Sonos. Les entrées « Titres likés » et
+  « Découvertes de la semaine » ne sont plus proposées d'office.
+
+- **Lecture dans un groupe Sonos.** Quand deux enceintes sont groupées, la
+  playlist choisie sur l'une part au meneur du groupe, qui n'est plus défait
+  pour l'occasion (avant, elle ne jouait rien sur la seconde). Un groupe défait
+  dans l'app Sonos ne détourne plus la musique : elle part dans la pièce
+  demandée.
+
+- **Tous vos favoris Sonos, sans limite.** Les sélecteurs proposent chaque
+  favori de « Mes favoris », même au-delà d'une dizaine (avant, les noms qui
+  dépassaient 255 caractères au total étaient laissés de côté sans un mot).
+  Un favori dont casasmooth ne peut pas transmettre le nom (un espace au
+  début, un nom comme « 2.50 ») est signalé sur la page Media.
+
+- **Rien ne se perd en silence au passage à Sonos.** Une playlist choisie
+  avant, qu'aucun favori Sonos ne porte, est nommée une fois dans une
+  notification et reste indiquée sur la page Media jusqu'à ce que vous
+  l'ajoutiez dans l'app Sonos. Dans l'app casasmooth, une playlist refusée dit
+  pourquoi (« ajoutez-la dans l'app Sonos », « réessayez dans un instant »).
+
+- **La page Media change pour les maisons à enceintes Sonos** (abonnement
+  Media avancé) : « Lecteurs multimédia », « Multiroom Sonos », « À l'écoute »
+  et « Bibliothèque musicale » laissent la place à la page musique —
+  Programmation, Toute la maison, Groupes, Lecteurs. Un remplacement voulu.
+  L'add-on Music Assistant, s'il est installé, n'est pas désinstallé et reste
+  dans la sauvegarde quotidienne.
+
 ## 2.0.143 - 2026-10-28
 
 - **Vos favoris dans l'ordre que vous voulez.** Sur l'Aperçu, une poignée en
