@@ -1,5 +1,153 @@
 # Changelog
 
+## 2.0.146 - 2026-11-09
+
+- **L'accès à distance et le support se décident sur la box.** Deux
+  interrupteurs, « Autoriser l'accès à distance » et « Autoriser le
+  support ». Une box neuve n'ouvre ni l'un ni l'autre tant qu'une personne ne
+  l'a pas accepté. Les box déjà en service ne changent pas.
+
+- **Les unités des compteurs sont lues, plus supposées.** Une prise en Wh, une
+  pompe à chaleur en MWh ou un compteur d'eau en litres s'inscrivent
+  correctement dans l'historique des consommateurs et dans le décompte. La
+  vue Énergie et l'assistant ne prennent plus des mWh pour des MWh.
+
+- **Décompte de chauffage et d'eau chaude.** La part d'eau chaude se lit sur
+  les compteurs de chaleur du bâtiment, au lieu de chiffres saisis. Un total
+  de chaleur calculé exige des compteurs de logement qui ont mesuré : sinon la
+  part d'eau chaude montait à 100 %.
+
+- **La batterie suit mieux les limites.** Le plafond de décharge se resserre
+  tout de suite, et l'énergie gardée en fin de plan est comptée à son coût de
+  remplacement, au tarif le plus bas.
+
+- **Une batterie de maison générique peut suivre le plan.** Un nouveau
+  préréglage pilote sa charge et son plafond de décharge, sans jamais la faire
+  vendre au réseau. Un plafond tout juste changé est gardé, au lieu de tomber
+  à 0 W.
+
+- **PAC Stiebel Eltron (ISG) : une sonde absente n'est plus lue comme une
+  valeur.** La valeur « pas de capteur » de l'ISG est ignorée au lieu d'être
+  prise pour une température.
+
+- **L'onglet « Bâtiment » de casasmooth building dessine le même schéma que
+  l'onglet « Groupe »**, avec au-dessus l'autoconsommation, l'autonomie et les
+  parts d'énergie du bâtiment.
+
+- **Dans un bâtiment relié par l'API, le confort d'un logement ne passe plus
+  par le cloud.** Les moyennes de zone ne sortent plus du logement par le
+  broker partagé.
+
+- **Un premier démarrage au journal propre.** L'attente normale du tunnel
+  n'est plus annoncée comme une erreur, la page caméras d'une box neuve se
+  génère sans erreur, et un cloud débordé (408, 429) fait réessayer le tunnel
+  au lieu de le laisser fermé jusqu'au redémarrage suivant. Le journal ne
+  montre plus que le début de l'identifiant de la box.
+
+## 2.0.145 - 2026-11-09
+
+- **La musique revient dans les maisons sans Sonos.** Chaque pièce joue par le
+  chemin de son lecteur : une enceinte Sonos par vos favoris Sonos, les autres
+  lecteurs par Music Assistant. Depuis la 2.0.144, une maison sans Sonos
+  n'avait plus de musique programmée.
+
+- **Vos noms restent sur les cartes avec Home Assistant 2026.11.** Une entité
+  renommée à la main garde le nom qu'elle portait avant la 2026.11. Un appareil
+  jamais renommé ne s'affiche plus sous son nom réseau, ni dans « Règles » ni
+  dans l'historique. L'assistant nomme les entités comme les cartes.
+
+- **Le chauffage suit mieux la présence.** La chauffe part 10 secondes après
+  votre arrivée au lieu de 30 ; le délai se règle par pièce, de 0 à 60 s, dans
+  la carte « Hystérésis chauffage ». Une pièce reste occupée entre deux
+  mouvements pendant le Délai chauffage (au moins 10 minutes) : un bain occupé
+  ne voit plus son radiateur coupé. Un redémarrage de Home Assistant ne prive
+  plus la maison de chauffage pendant 10 minutes. Une fenêtre ouverte coupe le
+  chauffage d'une pièce pilotée par SGr, sans règle à écrire.
+
+- **Un appui, une commande.** Tant qu'un appareil lent n'a pas répondu, un
+  nouvel appui sur sa tuile est ignoré, et la tuile le montre. Avant, ce second
+  appui pouvait partir en double, ou en commande inverse.
+
+- **L'éclairage dit ce que fait chaque réglage.** La carte de réglage par
+  période montre la luminosité à part, « Quand il fait assez clair : Éteindre
+  les lampes » et un seul seuil, avec la luminosité mesurée à côté. Le reste
+  est replié dans « Options avancées ».
+
+- **Proches : les réglages du suivi passent dans la roue dentée**, en tuiles
+  nommées. La pause et l'alerte d'essai sont sur la carte du jour, et le « ? »
+  mène à l'aide de la vue Proches.
+
+- **La présence par pièce en Bluetooth : un moteur casasmooth remplace
+  Bermuda.** Sur la page « Personnes et traceurs », l'administrateur attache un
+  traceur à chaque personne, avec son accord. Le moteur démarre en
+  observation : aucune pièce n'est montrée tant que l'administrateur ne la rend
+  pas visible. Bermuda est retiré des box à la mise à jour.
+
+- **L'optimiseur pilote davantage.** Son plan pilote aussi la batterie, et
+  plusieurs batteries d'un même site une à une. Avec une borne bidirectionnelle,
+  il décide heure par heure quand la voiture rend du courant à la maison, sans
+  dépasser ce que la maison tire sans elle, et jamais sous un ordre de votre
+  gestionnaire de réseau qui demande de consommer. Un ordre du réseau ne rend
+  plus le plan impossible : le plan dit ce qui dépasse et ce qui manque.
+
+- **Plusieurs onduleurs Huawei derrière un SDongle sont pilotés ensemble** :
+  une limite pour le site, les batteries réparties par une règle écrite.
+
+- **La limite d'injection d'un ordre du réseau est tenue dans la minute.**
+  Le bridage part de ce que chaque onduleur produit réellement, plus de sa
+  puissance nominale : il ne descend plus par paliers pendant plusieurs
+  minutes. Un onduleur qui ne produit pas n'est plus forcé à son minimum.
+
+- **PAC Stiebel Eltron (ISG) : un blocage SG Ready bloque bien la pompe à
+  chaleur**, au lieu de la mettre en « recommandé ».
+
+- **Une erreur du serveur de tarifs Innostrom vous est signalée**, sans toucher
+  à la liaison.
+
+- **Un appareil que Solar Manager pilote ne remplit plus le journal
+  d'erreurs.** Déclaré sans fiche d'appareil (`eid:`), il échouait toutes les
+  5 minutes avec « connection failed — 'eid' ». Il reste visible pour les
+  ordres du réseau.
+
+- **Les bâtiments ont leur tableau de bord, « casasmooth building ».** Les
+  pages du bâtiment et de la coordination quittent l'app de l'habitant. Elles
+  montrent le chauffage à distance et l'eau, chaque tuile avec sa courbe sur
+  24, 48 ou 96 heures, les grandeurs actuelles de chaque bâtiment et le nom du
+  bâtiment. Un onglet « Groupe » montre chaque box de la communauté avec le
+  schéma de son bâtiment. Aucune adresse ni aucun identifiant de box n'y
+  apparaît.
+
+- **Le décompte DIFEE accepte les courbes de votre gestionnaire de réseau** (au
+  quart d'heure, SDAT-CH ou CSV de portail) et les immeubles à deux onduleurs.
+  Le retour à l'heure d'hiver ne perd plus une heure. Les box d'un bâtiment
+  neuf échangent par leur API, sans passer par le cloud.
+
+- **Communauté d'énergie : une part d'absorption se livre en ampères** aux
+  bornes de recharge, avec un plancher de 6 A, et se mesure sur leur index
+  d'énergie.
+
+- **Recharge : les entités d'une borne OCPP ne restent plus indisponibles**
+  sous Home Assistant 2026.8, et un serveur OCPP peut tourner dans la box.
+
+- **Home Assistant redémarre quand il le faut, une seule fois.** Un nouveau
+  tableau de bord apparaît sans redémarrage à la main, et un redémarrage déjà
+  fait ne se rejoue plus. Dès Home Assistant 2026.8, casasmooth n'écrit plus de
+  bloc `http:` dans `configuration.yaml` : la réparation « http », qui
+  annonçait une rupture en 2027.2, disparaît après un redémarrage.
+
+- **L'accès à distance est inclus avec tout service payant.** Sans service
+  payant, il se prend seul. La formule gratuite garde la base et la vue de la
+  maison, sans accès à distance.
+
+- **Une box neuve sans compte casasmooth démarre sans accroc.** Son tunnel
+  attend que le cloud la connaisse au lieu d'abandonner, les services gratuits
+  arrivent dès le premier démarrage au lieu du lendemain, et la notification
+  « accès distant prêt » n'apparaît plus tant qu'aucun propriétaire n'est
+  déclaré.
+
+- **Le bouton « Recommandations » d'une box sans pièce** n'ouvre plus
+  « Configuration error » : il dit pourquoi la liste est vide.
+
 ## 2.0.144 - 2026-11-04
 
 - **Une limite d'injection, comme celle de soutirage.** Vous pouvez fixer ce que
