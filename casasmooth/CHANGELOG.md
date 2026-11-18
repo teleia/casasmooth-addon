@@ -1,5 +1,318 @@
 # Changelog
 
+## 2.0.147 - 2026-11-18
+
+- **Alertes de gaz : la phrase d'aide suit votre langue.** Après le message
+  de l'alerte, la box ajoutait une phrase d'aide écrite en anglais, quelle que
+  soit la langue de l'habitant (français, allemand, italien, tchèque). Elle est
+  maintenant traduite, pour les gaz de sécurité (monoxyde de carbone, hydrogène,
+  méthane : aérer, éviter flamme et étincelle, quitter les lieux au moindre
+  doute) comme pour les alertes de confort (CO₂, ammoniac, éthanol, dioxyde et
+  oxydes d'azote, composés organiques volatils, particules). **Ce qui ne change
+  pas :** les seuils, les délais et le fait que la box alerte seulement : elle
+  ne commande aucune ventilation.
+
+- **Pont Matter : un changement d'occupant, une remise d'usine et la
+  préparation d'une image de clonage retirent les appairages.** Les
+  appairages du pont (Apple Home, Google Home…) sont ceux de l'occupant.
+  Seul le bouton « réinitialiser le pont » les retirait : après un
+  changement d'occupant, l'ancien occupant commandait encore lumières,
+  volets et chauffage du logement depuis son contrôleur, et une box remise
+  d'usine gardait ceux du foyer précédent. **Ce qui change :** ces trois
+  gestes arrêtent le pont, effacent ses appairages et son code (une
+  restauration en attente comprise). Le redémarrage de l'app qui suit un
+  changement d'occupant ou une remise d'usine relance le pont avec un code
+  neuf ; une image de clonage n'en porte aucun. Le nouvel occupant appaire
+  le pont avec le nouveau QR. Si le pont ne peut pas être arrêté, le geste
+  le dit (erreur) au lieu d'annoncer une réinitialisation faite.
+  Les nouvelles images de box n'emportent plus le pont de la machine qui a
+  servi de modèle. **Ce qui reste :** les box préparées depuis une image
+  plus ancienne partagent encore le code d'appairage de cette image tant
+  que leur pont n'a pas été réinitialisé.
+
+- **Pont Matter : les appairages sont dans la sauvegarde.** Les appairages
+  du pont (Apple Home, Google Home…) et son code vivaient dans le volume
+  privé de l'app, que la sauvegarde ne lisait pas. Une box restaurée sur
+  un nouveau matériel revenait avec un pont neuf : « Pas de réponse » pour
+  chaque appareil dans le contrôleur, pièces, scènes et automatismes à
+  refaire. **Ce qui change :** chaque sauvegarde emporte l'état
+  d'appairage du pont (quelques Mo). Une restauration le remet en place au
+  redémarrage de l'app qui la suit, avant que le pont ne démarre. **Ce
+  qui reste :** les sauvegardes faites avant cette version n'ont pas cet
+  état ; une box restaurée depuis l'une d'elles devra encore être
+  appairée de nouveau. Restaurer une sauvegarde plus ancienne sur la même
+  box ramène aussi les appairages de ce jour-là : un contrôleur ajouté
+  depuis devra être appairé de nouveau.
+
+- **Pont Matter : un appareil Matter n'apparaît plus deux fois dans le
+  contrôleur.** Un appareil Matter partagé depuis l'app Maison ou Google
+  Home avec la box (Matter permet plusieurs contrôleurs) était renvoyé par
+  le pont au contrôleur qui l'avait déjà. **Ce qui change :** le pont ne
+  montre plus aucun appareil de l'intégration Matter de Home Assistant, ni
+  ses autres présentations (une prise Matter montrée en lampe, par
+  exemple) ; ces appareils se partagent d'un contrôleur à l'autre par
+  Matter lui-même. Si votre contrôleur voyait un tel appareil par le pont,
+  il le perd, avec la pièce et les scènes que vous lui aviez données là.
+  Un appareil Matter ajouté à la box seule se partage avec l'app Maison ou
+  Google Home depuis Home Assistant (« Partager l'appareil »).
+
+- **Communauté d'énergie : l'absorption par les bornes à consigne respecte
+  le plafond de recharge du site.** En mode `ems`, une part d'absorption de
+  la communauté relevait les consignes des bornes pilotées en courant (OCPP,
+  Easee, Zaptec…) jusqu'à la part reçue, sans regarder la « Puissance max.
+  bornes VE » du site. **Ce qui change :** la box ne relève que ce que ce
+  plafond laisse, une fois comptée la recharge qui tourne déjà sur le site,
+  et elle ne promet pas plus à la communauté. Dans le doute, elle ne relève
+  rien : plafond à 0 (non déclaré), entité absente, valeur négative ou
+  illisible, lecture de Home Assistant de plus d'une minute ou en échec,
+  autre borne de la catégorie de recharge qui ne répond pas, borne à
+  consigne dont ni la consigne ni la puissance ne se lisent. Une borne
+  qu'une fenêtre tient reste comptée à la consigne qu'on lui a posée, même
+  si sa voiture ralentit. Une part ne dépasse plus la puissance de charge
+  que le membre déclare, même quand la décision ne lui en attribue pas.
+  Des fenêtres en cours reprises après un redémarrage se replanifient
+  ensemble sous le plafond du moment au lieu de reposer chacune sa consigne
+  d'avant l'arrêt ; une fenêtre ouverte juste après la fin de la précédente
+  rend bien, à sa fin, la consigne que l'habitant avait posée ; une
+  restitution en échec est réessayée une fois au passage suivant.
+  **Ce qui reste :** pendant une fenêtre, c'est l'équilibreur de recharge
+  qui tient le plafond, après coup, et seulement si le service d'énergie
+  est servi et si les bornes sont rangées dans la catégorie « ev charging ».
+  Pour les bornes à interrupteur, une lecture du site en échec ou de plus
+  d'une minute n'allume plus aucune borne (elle en allumait jusqu'à quatre).
+
+- **Une caméra s'affiche sous le nom que vous lui avez donné.** Dans les
+  réglages de sa zone, dans la page des caméras et dans les gabarits
+  caméra, une caméra renommée s'affichait encore sous le nom d'usine de son
+  appareil, ou sous le nom de son flux. **Ce qui change :** ces trois
+  endroits montrent le nom que Home Assistant affiche pour la caméra, et
+  le nom posé à la main y passe avant le nom d'usine. Une caméra jamais
+  renommée peut donc changer de libellé dans les réglages de sa zone, où
+  elle portait le seul nom de son appareil : « Garage » devient « Garage
+  Fluent » quand l'intégration nomme le flux.
+
+- **La page des caméras affiche de nouveau les images.** Depuis la
+  version 2.0.144, le tableau de bord « casasmooth cameras » n'affichait
+  plus aucune caméra (« No cameras with recent images found. ») alors que
+  les captures continuaient d'arriver dans la galerie : la page demandait
+  sa liste là où Home Assistant ne sert que des images et des vidéos. Elle
+  lit désormais la liste de la galerie par Home Assistant, avec la session
+  de l'utilisateur. **Ce qui change :** les caméras qui ont des images
+  réapparaissent, cent images au plus par caméra, les plus récentes
+  d'abord. Si la liste ne peut pas être lue, la page le dit, avec la
+  raison. Le bouton « MP4 » n'apparaît que quand la vidéo existe. Les
+  boutons « AI » et « LLM » d'une image, qui n'apparaissaient plus depuis
+  la 2.0.144, sont retirés : ces analyses ne peuvent pas être ouvertes par
+  ce chemin.
+
+- **Décompte DIFEE : un logement peut avoir plusieurs compteurs d'un même
+  fluide.** Deux colonnes d'eau froide, deux compteurs électriques, deux
+  compteurs de chaleur : le registre du bâtiment accepte une liste de
+  compteurs par fluide. Jusqu'ici une liste était ignorée et le fluide
+  entier n'avait plus de compteur. La consommation est la somme des
+  compteurs ; un jour n'est compté comme mesuré que si chacun l'a mesuré ;
+  le total prend la classe de mesure la plus faible ; la quittance de
+  relevé imprime chaque compteur sur sa ligne, avec sa paire d'index ; les
+  réserves nomment le compteur en cause. Un compteur du gestionnaire de
+  réseau (`source: grd`) reste seul parmi les compteurs électriques d'un
+  logement : le portail refuse de l'enregistrer à côté d'un autre, et la box
+  ignore alors l'électricité de ce logement, avec un avertissement. Un
+  compteur de la liste que la box ne sait pas lire (forme distante, entité de
+  banc…) n'est pas écarté en silence : le portail ne l'enregistre pas, et une
+  box qui le reçoit quand même compte le fluide comme non mesuré plutôt que
+  de facturer les autres compteurs comme toute la consommation. Au quart
+  d'heure (RCP), un logement à plusieurs compteurs électriques dont l'un ne
+  répond pas — ou n'est pas lisible — compte la consommation des compteurs
+  qui ont répondu ; une réserve dit sur combien de quarts d'heure sa part
+  est sous-estimée, à corriger avant de publier le décompte. **Ce qui
+  change :** rien pour un registre à un seul compteur par fluide, sauf le
+  libellé de quelques réserves (voir plus bas). Les communs
+  et les bornes à plusieurs compteurs comptaient chaque jour autant de fois
+  qu'ils ont de compteurs ; ils le comptent une fois (aucun montant n'en
+  dépendait). L'export vers un partenaire de facturation exclut, avec une
+  erreur, un logement à plusieurs compteurs électriques tant que le
+  partenaire n'a pas accepté un relevé journalier par compteur, et exige le
+  numéro de série de chaque compteur d'un fluide qui en a plusieurs.
+
+- **Les réserves du décompte DIFEE nomment un logement par son libellé,
+  jamais par l'identifiant de sa box, et celles d'un logement restent sur sa
+  pièce.** Certaines réserves plus anciennes (surface manquante, bail mal
+  daté, compteur non mesuré, jours d'avant la conversion d'unité) portaient
+  l'identifiant interne du logement, qui est aussi l'adresse de sa box ; un
+  bail mal daté portait l'adresse électronique du locataire. Elles disent
+  désormais « 1.02 — Chaleur : … », ou le rang du logement au registre
+  quand il n'a pas de libellé, et le bail par son numéro. La réserve d'un
+  logement (dont une panne déclarée, qui porte ses dates) ne va plus que sur
+  la pièce de ce logement ; la gérance les voit toutes. **Ce qui change :**
+  le texte de ces réserves ; aucun montant.
+
+- **Un geste d'exploitant de la communauté ne suit plus une redirection vers
+  n'importe quel hôte.** `python3 -m app community enable`, `key-approve`,
+  `key-reset`, `parameters set` et `close` s'inscrivent chez le leader, sous
+  un jeton admin ; quand la réplique de la box est un suiveur, la commande
+  suivait l'adresse qu'elle désignait, quelle qu'elle soit. Elle ne la suit
+  plus que vers une réplique connue, sur le même schéma et le même port. Ce
+  sont les pairs de la réplique locale ; pour une réplique nommée sur une
+  autre machine (`coordinator_rest_url`), les répliques nommées par
+  l'exploitant (`EC_COORDINATOR_PEERS`, ou la clé `coordinator_peers` de
+  `locals/ec_member.yaml`). **Ce qui change :** rien sur une box qui porte
+  sa réplique. Avec une réplique nommée et sans répliques nommées, le geste
+  rend `HTTP 307 : redirect_refused` et n'inscrit rien. Les dépôts de
+  relevés, qui ne portent aucun secret, suivent la redirection comme avant.
+
+- **La charge moyenne de la batterie tient compte de la taille de chaque
+  batterie, et ne se lit plus sur une partie d'entre elles.** Avec
+  plusieurs batteries déclarées à l'optimiseur (`optimizer.batteries`,
+  avec leur capacité et leur capteur d'état de charge),
+  `sensor.cs_power_battery_state_average` est l'énergie stockée sur la
+  capacité totale : 10 kWh à 90 % et 14 kWh à 20 % font 49 %, et non plus
+  55 %, et quand une de ces batteries ne répond pas, la moyenne devient
+  indisponible au lieu de prendre la valeur des autres. **Ce qui change :**
+  rien sans ces déclarations, la moyenne reste simple, et un capteur muet ne
+  la rend pas indisponible (deux capteurs peuvent lire la même batterie).
+  La moyenne a désormais des statistiques à long terme dans Home Assistant.
+
+- **L'état de charge d'une batterie lu par Modbus compte enfin dans la
+  charge moyenne de la maison.** Quand un onduleur intégré par son profil
+  Modbus (Huawei SUN2000 et les autres EID locales) publie l'état de charge
+  de sa batterie, la box retirait sa classe `battery` : le capteur
+  `sensor.cs_home_battery_soc` (ou `cs_home_battery_<n>_soc`) existait, mais
+  restait sans catégorie. Il entre désormais dans
+  `sensor.cs_power_battery_state_average`. **Ce qui change :** sur une box
+  qui publie un état de charge par ce chemin, cette moyenne apparaît, ou
+  compte une batterie de plus. Elle donne l'état de charge de départ de
+  l'optimiseur, l'état de charge que lisent les règles SGr et la commande
+  d'une batterie quand sa propre lecture manque, le palier de prix effectif
+  (batterie au-dessus de 20 %), les seuils « batterie » des consommateurs,
+  l'état de charge publié aux pairs de la communauté, et celui que le T1
+  publie aux logements (DIFEE, pour l'affichage), quand le registre ne nomme
+  pas son propre capteur. Les classes `water` et `gas` passent aussi, pour un
+  compteur d'eau ou de gaz lu par une passerelle Modbus. La box vérifie
+  l'unité (`%` pour une batterie, `m³` pour l'eau et le gaz, « m3 » écrit
+  « m³ » ; un compteur en litres se publie en m³ avec `scale: 0.001`) et la
+  `state_class` (un index est un total, un état de charge une mesure). Une
+  classe sur une autre unité tombe, comme avant ; une `state_class`
+  impossible tombe, la classe reste.
+
+- **Correctif de sécurité : un compte de la maison ne peut plus écrire dans
+  le dossier de casasmooth par les caméras.** La configuration de Home
+  Assistant ouvrait tout `/config/casasmooth/` aux services qui enregistrent
+  une image ou une vidéo de caméra : tout compte, administrateur ou non,
+  pouvait y écrire une image sous le nom de son choix. Les captures en attente
+  d'analyse vont désormais dans `/media/casasmooth/captures`, à côté de la
+  galerie, et casasmooth n'ouvre plus aucun dossier en plus de ceux que Home
+  Assistant autorise d'office. Les captures qui attendaient encore dans
+  l'ancien dossier sont déplacées au passage suivant. **Ce qui change :** une
+  automatisation écrite à la main qui enregistre une image dans
+  `/config/casasmooth/` échoue désormais ; elle doit viser
+  `/media/casasmooth/captures/`.
+
+- **Les images des caméras ne partent plus dans les sauvegardes.** Depuis
+  le 29.10, la galerie des caméras (quatorze jours d'images de l'intérieur
+  du logement) partait dans chaque sauvegarde. Elle en est exclue, comme
+  les vidéos et les captures en attente. Une restauration ne ramène plus
+  d'images, même depuis une sauvegarde faite avant cette version. Les
+  images et les vidéos partent aussi avec l'occupant : la remise d'usine
+  et le changement d'occupant les effacent.
+
+- **La télémétrie du véhicule s'écrit aussi sur changement d'état.** Ces
+  relevés n'avaient jamais été enregistrés ; seul le relevé du quart
+  d'heure l'était.
+
+- **Une batterie commandée dit si elle est prête à être mise en service,
+  et se met en service depuis la page.** Pour un appareil qui porte un bloc
+  `der_control`, l'onglet Configuration de l'EMS montre son état : commande
+  ouverte ou fermée, et ce qui manque pour l'ouvrir (profil éprouvé sur du
+  matériel, optimiseur en marche, batterie modélisée sous le nom de
+  l'appareil). Il signale aussi un tarif sans variation, où la batterie
+  pilotée ne gagne rien. Un bouton ouvre la commande quand tout passe, un
+  autre la referme à tout moment. Rien ne change pour une box sans ce bloc,
+  et aucune commande ne peut être ouverte aujourd'hui : le profil Huawei
+  reste « banc seulement » tant qu'il n'a pas été éprouvé sur un vrai
+  onduleur.
+
+- **Refermer la commande d'une batterie rend ses réglages à l'onduleur.**
+  Quand un bloc `der_control` repasse à `enabled: false`, la box arrête
+  l'ordre forcé en cours et remet le plafond de décharge, la charge depuis le
+  réseau et la limite d'injection à leurs valeurs d'origine, au cycle suivant.
+  Avant, ces réglages restaient dans l'onduleur : une batterie « gardée »
+  pouvait ne plus rien rendre. Il faut refermer le bloc, pas le supprimer :
+  supprimé alors que l'onduleur garde ces réglages, la box le signale à
+  chaque cycle et attend qu'il soit remis, fermé.
+
+- **Un onduleur hybride ne fait plus passer sa batterie pour du solaire au
+  décompte.** Quand la production de l'immeuble se lit sur un onduleur qui
+  porte une batterie (Huawei SUN2000), le registre peut le dire
+  (`hybrid_battery_meter`) : le décompte sépare alors la décharge de la
+  production, chacune à son prix, et le contrôle du bilan compte ce que la
+  batterie prend au réseau la nuit.
+
+- **Choisir le prix spot suisse comme source d'injection suffit pour le
+  régime légal.** L'optimiseur applique alors la règle de reprise de la loi :
+  le prix du trimestre jusqu'au 31.12.2026 (et sans compteur intelligent, au
+  plus tard jusqu'à fin 2027), puis le prix de l'heure d'injection et le
+  complément du minimum dès le 1.1.2027. Il n'y a plus de clé à poser dans
+  `cs_sgr_devices.yaml` ; une clé `feedin_regime: legal` ou `contract` déjà
+  posée garde la main. **Ce qui change sans geste :** une box déjà sur cette
+  source sans clé quitte la courbe brute pour la règle légale. Si son contrat
+  est indexé sur le spot, déclarer `feedin_regime: contract`.
+
+- **L'immeuble contrôle lui-même ses relevés (en observation).** Chaque nuit,
+  la box d'un immeuble compare ce que le compteur général a vu entrer à ce que
+  les compteurs des logements, des communs et des bornes ont compté : pour
+  l'électricité, et pour l'eau froide, l'eau chaude et la chaleur quand le
+  bâtiment les compte. L'onglet Bâtiment le montre dans la tuile « Contrôle
+  technique » (contrôlé, réserve ou non évaluable, sur 7 et 30 jours), et le
+  récapitulatif de la gérance l'imprime avec le décompte. Aucun logement n'y
+  est nommé. Ses seuils sont provisoires : il n'entre dans aucun montant.
+
+- **Une pompe à chaleur à deux relais SG Ready se déclare avec son
+  interface.** Le nouveau type `sg_ready_relays` pose les deux contacts dans
+  l'ordre de la norme, tient les durées du BWP, et ne force jamais une PAC en
+  interface 1.1 (où « forcé » la limiterait). Si le contact SG1 appartient au
+  gestionnaire de réseau, casasmooth ne pose que SG2 et l'ouvre en quelques
+  secondes quand le réseau bloque (4 s au banc).
+
+- **Le forcé d'une pompe à chaleur à relais se vérifie sur sa consommation.**
+  Il n'est posé qu'avec l'accord de l'installateur, puis jugé sur la puissance
+  moyenne relevée dans l'historique : une PAC qui consomme moins sous le forcé
+  est en fait en interface 1.1. Le forcé est alors suspendu pour la journée,
+  et retiré si cela se reproduit.
+
+- **Un état SG Ready hors de 1 à 4 reçu du réseau est refusé**, plus arrondi :
+  un 0 devenait un blocage, un 9 un enclenchement forcé.
+
+- **La mesure du raccordement n'est plus servie figée** au gestionnaire de
+  réseau : au-delà de dix minutes sans relevé, l'interface répond qu'elle
+  n'a pas de mesure.
+
+- **Le chauffe-eau et les consignes numériques sont relus** après un ordre du
+  réseau : la preuve dit si l'appareil a pris la consigne.
+
+- **Nettoyage.** L'ancien jeton du webhook SGr n'ouvre plus rien, ses
+  branches mortes sont retirées. Effacer une conversation du chat demande d'en
+  être l'auteur.
+
+- **Le mail de recharge nomme la borne comme son QR, plus comme le
+  formulaire.** Le nom vient de la box : celui qui est imprimé sur le QR du
+  mur. Un QR qui ne mène à aucun appareil ouvert aux sessions est refusé, sans
+  mail. Ni le texte du visiteur ni l'adresse du destinataire n'entrent plus
+  dans le mail, et la quantité est un nombre (trois chiffres, deux décimales).
+
+- **Le lien du mail de recharge n'autorise plus rien tout seul.** Il ouvre une
+  page de confirmation ; seul son bouton démarre la recharge, une seule fois
+  même après deux clics. Une demande non confirmée expire au bout d'un jour.
+
+- **Le QR d'une prise ne porte plus le GUID de la box**, et les liens de la
+  box suivent le nom de son tunnel plutôt que le GUID. Les QR déjà imprimés
+  marchent encore ; une réimpression retire le GUID.
+
+- **Les demandes de recharge sont plafonnées** par visiteur, par adresse et
+  par box ; au-delà, une page dit de réessayer plus tard.
+
+- **La recharge est traduite jusqu'au bout**, dont le tchèque, la page
+  d'erreur et le message « appareil occupé ».
+
 ## 2.0.146 - 2026-11-09
 
 - **L'accès à distance et le support se décident sur la box.** Deux
