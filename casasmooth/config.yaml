@@ -92,3 +92,17 @@ homeassistant_api: true
 auth_api: true
 
 watchdog: "http://[HOST]:[PORT:28100]/health"
+
+# La sauvegarde de Home Assistant prend tout /data de l'add-on. Ces fichiers n'y entrent jamais :
+# les secrets de la communauté (coordination entre bâtiments), le journal Raft vivant de la
+# réplique, son miroir. Restés dans la sauvegarde, ils fuiraient en clair ou ramèneraient la
+# réplique en arrière. Restent sauvegardés : la clé de vote du bâtiment et les archives des
+# périodes closes. Liste tenue par app/services/ec_community_service.py (STORE_BACKUP_EXCLUDE)
+# dans le dépôt casasmooth ; contrôle : python -m tools.store_manifest check.
+backup_exclude:
+  - "ec/secrets/*"
+  - "ec/coordinator/coordinator.db*"
+  - "ec/coordinator/raft/journal.bin"
+  - "ec/coordinator/raft/journal.bin.meta*"
+  - "ec/coordinator/raft/journal.bin.dump*"
+  - "ec/coordinator/raft/protocol_level"
